@@ -11,15 +11,31 @@ import javax.swing.table.AbstractTableModel;
 
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 
+
 /**
- *
- * @author Asus
+ * Predstavlja model tabele za klasu Autmomobil. Nasledjuje apstraktni model tabele i imeplementira njegove metode.
+ * 
+ * Ima listu svih autmobila koji ce se prikazati u tabeli, get i set metode ove liste i
+ * metodu za brisanje automobila iz liste.
+ * 
+ * @see AbstractTableModel
+ * @author Luka Obrenic
+ * @since 1.0.0
  */
 public class TableModelAutomobil extends AbstractTableModel{
-    
+	/**
+	 * Lista svih automobila kao lista tipa Automobil.
+	 * @see Automobil
+	 */
     List<Automobil> listaAutomobila;
+    /**
+     * Nazivi kolona tabele kao niz stringova.
+     */
     String[] naziviKolona = {"Vlasnik", "Godiste", "Marka"};
 
+    /**
+     * Neparametrizovani konstruktor koji inicijalizuje listu automobila.
+     */
     public TableModelAutomobil(){
         listaAutomobila = new ArrayList<>();
     }
@@ -51,15 +67,30 @@ public class TableModelAutomobil extends AbstractTableModel{
         return naziviKolona[column];
     }
 
+    /**
+     * Postavlja novu listu automobila koji ce se prikazati u tabeli i osvezava prikaz tabele.
+     * 
+     * @param listaAutomobila koja ce se prikazati u tabeli, kao lista tipa {@link Automobil}.
+     */
     public void setListaAutomobila(List<Automobil> listaAutomobila) {
         this.listaAutomobila = listaAutomobila;
         fireTableDataChanged();
     }
 
+    /**
+     * Vraca listu automobila koji se prikazuju u tabeli.
+     * 
+     * @return listaAutomobila koji se prikazuju u tabeli, kao lista tipa {@link Automobil}
+     */
     public List<Automobil> getListaAutomobila() {
         return listaAutomobila;
     }
 
+    /**
+     * Brise automobil iz tabele i osvezava prikaz tabele.
+     * 
+     * @param automobil koji ne treba vise da se prikazuje u tabeli, tipa {@link Automobil}
+     */
     public void izbirisiAutomobil(Automobil automobil) {
         listaAutomobila.remove(automobil);
         fireTableDataChanged();

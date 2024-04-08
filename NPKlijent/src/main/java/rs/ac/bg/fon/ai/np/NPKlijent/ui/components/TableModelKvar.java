@@ -9,17 +9,34 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.UoceniKvar;
 
 /**
- *
- * @author Asus
+ * Predstavlja model tabele za klasu UoceniKvar. Nasledjuje apstraktni model tabele i imeplementira njegove metode.
+ * 
+ * Ima listu svih uocenih kvarova koji ce se prikazati u tabeli, metode za dodavanje i brisanje automobila iz liste,
+ * kao i metodu za brisanje svih uocenih kvarova iz liste.
+ * 
+ * @see AbstractTableModel
+ * @author Luka Obrenic
+ * @since 1.0.0
  */
 public class TableModelKvar extends AbstractTableModel{
 
+	/**
+	 * Lista svih uocenih kvarova kao lista tipa UoceniKvar.
+	 * @see UoceniKvar
+	 */
     List<UoceniKvar> kvarovi;
+    /**
+     * Nazivi kolona tabele kao niz stringova.
+     */
     String[] naziviKolone = {"Opis kvara"};
 
+    /**
+     * Neparametrizovani konstruktor koji inicijalizuje listu uocenih kvarova.
+     */
     public TableModelKvar() {
         kvarovi = new ArrayList<>();
     }
@@ -49,26 +66,49 @@ public class TableModelKvar extends AbstractTableModel{
         return naziviKolone[column];
     }
     
+    /**
+     * Dodaje uoceni kvar u tabelu i osvezava prikaz tabele.
+     * 
+     * @param k uoceni kvar koji treba da se prikaze u tabeli, tipa {@link UoceniKvar}
+     */
     public void dodajKvar(UoceniKvar k){
         kvarovi.add(k);
         fireTableDataChanged();
     }
     
+    /**
+     * Brise uoceni kvar iz tabele i osvezava prikaz tabele.
+     * 
+     * @param row uoceni kvar koji ne treba vise da se prikazuje u tabeli, tipa {@link UoceniKvar}
+     */
     public void obrisiKvar(int row){
         //kvarovi.remove(k);
         kvarovi.remove(row);
         fireTableDataChanged();
     }
 
+    /**
+     * Vraca listu kvarova koji se prikazuju u tabeli.
+     * 
+     * @return kvarovi koji se prikazuju u tabeli, kao lista tipa {@link UoceniKvar}
+     */
     public List<UoceniKvar> getKvarovi() {
         return kvarovi;
     }
 
+    /**
+     * Postavlja novu listu uocenih kvarova koji ce se prikazati u tabeli i osvezava prikaz tabele.
+     * 
+     * @param kvarovi koji ce se prikazati u tabeli, kao lista tipa {@link UoceniKvar}.
+     */
     public void setKvarovi(List<UoceniKvar> kvarovi) {
         this.kvarovi = kvarovi;
         fireTableDataChanged();
     }
     
+    /**
+     * Brise sve uocene kvarove iz tabele i osvezava prikaz tabele.
+     */
     public void ocistiTabelu(){
         this.kvarovi.clear();
         fireTableDataChanged();

@@ -20,8 +20,7 @@ import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelKvar;
 /**
  * Predstavlja graficku formu koja prikazuje podatke o jednom automobilu. 
  * 
- * Moze sluziti za dodavanje novog automobila u bazu ili za izmenu postojeceg automobila u bazi.
- * Takodje moze sluziti da samo prikaze podatke u automobilu (read-only).
+ * Sluzi za dodavanje novog automobila u bazu ili za izmenu postojeceg automobila u bazi.
  * 
  * @see Automobil
  * @author Luka Obrenic

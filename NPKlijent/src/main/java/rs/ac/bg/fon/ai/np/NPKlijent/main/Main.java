@@ -11,8 +11,10 @@ import javax.swing.JPanel;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.FrmLogin;
 
 /**
- *
- * @author Cartman
+ * Metoda za pokretanje klijentske aplikacije.
+ * 
+ * @author Luka Obrenic
+ * @since 1.0.0
  */
 public class Main {
     public static void main(String[] args) {

@@ -109,7 +109,7 @@ public class FrmMain extends javax.swing.JFrame {
         jLabel3.setText("Dobro dosli u aplikaciju za auto-servis");
 
         lblNole.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNole.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/form/icon/slika.png"))); // NOI18N
+        lblNole.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rs/ac/bg/fon/ai/np/NPKlijent/ui/form/resources/slika.png"))); // NOI18N
 
         javax.swing.GroupLayout JPanelNoleLayout = new javax.swing.GroupLayout(JPanelNole);
         JPanelNole.setLayout(JPanelNoleLayout);

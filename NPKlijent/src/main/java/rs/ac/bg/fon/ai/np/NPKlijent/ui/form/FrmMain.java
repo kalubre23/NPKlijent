@@ -424,6 +424,14 @@ public class FrmMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnOdjaviSeActionPerformed
 
+    /**
+     * Metoda koja se poziva klikom na meni stavku krairaj novog vlasnika.
+     * 
+     * Otvara formu za rad sa vlasnikom automobila.
+     * 
+     * @see FrmVlasnikDetalji
+     * @param evt
+     */
     private void meniItemDodajVlasnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meniItemDodajVlasnikaActionPerformed
         // TODO add your handling code here:
         try {
@@ -439,6 +447,14 @@ public class FrmMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_meniItemDodajVlasnikaActionPerformed
 
+    /**
+     * Metoda koja se poziva klikom na meni stavku izmeni vlasnika.
+     * 
+     * Otvara formu za rad sa vlasnikom automobila.
+     * 
+     * @see FrmSviVlasnici
+     * @param evt
+     */
     private void meniItemIzmeniVlasnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meniItemIzmeniVlasnikaActionPerformed
         // TODO add your handling code here:
         try {

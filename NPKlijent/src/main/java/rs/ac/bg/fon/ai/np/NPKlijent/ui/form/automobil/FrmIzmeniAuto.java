@@ -20,8 +20,8 @@ import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelAutomobil;
 /**
  * Predstavlja graficku formu za pretragu automobila. 
  * 
- * Pretraga se vrsi prema imenu i prezimenu vlasnika automobila. 
- * Za automobil koji je vracen kao rezultat pretrage se mogu videti detalji ili izmeniti podaci o njemu.
+ * Pretraga se vrsi prema registarskim tablicama automobila. 
+ * Za automobil koji je vracen kao rezultat pretrage mogu se obrisati ili izmeniti podaci o njemu.
  * 
  * @see Automobil
  * @author Luka Obrenic
@@ -178,9 +178,9 @@ public class FrmIzmeniAuto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Metoda koja se poziva klikom na dugme pretrazi. Pretraga se vrsi prema imenu i prezimenu vlasnika.
+     * Metoda koja se poziva klikom na dugme pretrazi. Pretraga se vrsi prema registarskim tablicama automobila.
      * 
-     * Vrsi validaciju unete vrednosti za ime i prezime i poziva metodu kontrolera za pretragu automobila u bazi.
+     * Vrsi validaciju unetu vrednost registarske tablice i poziva metodu kontrolera za pretragu automobila u bazi.
      * Rezultat prerage se prikazuje u tabeli automobila.
      * 
      * @param evt
@@ -268,7 +268,7 @@ public class FrmIzmeniAuto extends javax.swing.JPanel {
     /**
      * Metoda koja se poziva klikom na dugme prikazi sve automobile.
      * 
-     * Takodje poziva metodu kontrolera za pretragu ali kao kriterijum pretrage se dodeljuje da je ime i prezime vlasnika prazan string.
+     * Takodje poziva metodu kontrolera za pretragu ali kao kriterijum pretrage se dodeljuje da je tablica prazan string.
      * Na taj nacin se vracaju svi automobili iz baze. 
      * 
      * @param evt

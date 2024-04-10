@@ -34,7 +34,7 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
 	 */
     Automobil automobil;
     /**
-     * Referenca ka formi za izmenu automobila.
+     * Referenca ka formi za pretragu automobila.
      */
     FrmIzmeniAuto frmIzmeniAuto;
 
@@ -220,7 +220,7 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
     /**
      * Metoda se poziva klikom na dugme sacuvaj automobil. Sluzi za cuvanje novog automobila ili izmenu postojeceg.
      * 
-     * Vrsi validaciju imena i prezimena vlasnika, godista i registarske tablice. Nakon toga
+     * Vrsi validaciju registarske tablice i godista automobila. Nakon toga
      * poziva metodu kontrolera za cuvanje ili izmenu automobila u zavisnosti od toga da li je
      * atribut automobil null. 
      * Ako jeste null to znaci da treba napraviti novi automobil i pozvati metodu kontrolera za cuvanje automobila u bazi.
@@ -365,7 +365,7 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
      * 
      * Ukoliko se dodaje novi automobil dodace samo listu automobila na formi (ostale podatke unosi serviser).
      * Ukoliko se vrsi izmena podataka automobila, prikazace se vrednosti svih atributa tog automobila na formi.
-     * @throws Exception
+     * @throws Exception ako dodje do greske pri vracanju svih marki i vlasnika iz baze
      */
     private void prepareView() throws Exception {
         vratiMarke();
@@ -385,7 +385,7 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
     /**
      * Vraca sve marke automobila. Poziva metodu kontrolera za vracanje svih marki automobila iz baze.
      * 
-     * @throws Exception
+     * @throws Exception ako dodje do greske pri vracanju svih marki iz baze
      */
     private void vratiMarke() throws Exception {
         try {
@@ -416,6 +416,11 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
         ((TableModelKvar)tblKvarovi.getModel()).ocistiTabelu();
     }
 
+    /**
+     * Vraca sve vlasnike automobila. Poziva metodu kontrolera za vracanje svih vlasnika automobila iz baze.
+     * 
+     * @throws Exception ako dodje do greske pri vracanju svih vlasnika iz baze
+     */
     private void vratiVlasnike() throws Exception {
         try {
             Vlasnik v = new Vlasnik();

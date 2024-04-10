@@ -43,7 +43,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtImePrezimeVlasnika" min="-2" pref="175" max="-2" attributes="0"/>
+                                      <Component id="txtTablice" min="-2" pref="175" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="btnPretrazi" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -67,7 +67,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtImePrezimeVlasnika" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTablice" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnPretrazi" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -114,10 +114,10 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Filtriraj automobile prema vlasniku:"/>
+        <Property name="text" type="java.lang.String" value="Filtriraj automobile prema tablicama:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtImePrezimeVlasnika">
+    <Component class="javax.swing.JTextField" name="txtTablice">
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator2">
     </Component>

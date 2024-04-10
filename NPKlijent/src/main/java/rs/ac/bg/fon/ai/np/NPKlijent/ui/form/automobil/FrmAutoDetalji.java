@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Marka;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.UoceniKvar;
+import rs.ac.bg.fon.ai.np.NPCommon.domain.Vlasnik;
 import rs.ac.bg.fon.ai.np.NPKlijent.logic.Controller;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelKvar;
 
@@ -66,9 +67,8 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
         lblImePrezimeVlasnika = new javax.swing.JLabel();
         lblGodiste = new javax.swing.JLabel();
         lblMarka = new javax.swing.JLabel();
-        txtImePrezimeVlasnika = new javax.swing.JTextField();
         txtGodiste = new javax.swing.JTextField();
-        cbMarke = new javax.swing.JComboBox<>();
+        cbVlasnik = new javax.swing.JComboBox<>();
         btnSacuvaj = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -79,14 +79,15 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         btnDodajKvar = new javax.swing.JButton();
         btnObrisiKvar = new javax.swing.JButton();
+        cbMarke = new javax.swing.JComboBox<>();
 
-        lblImePrezimeVlasnika.setText("Ime i prezime vlasnika");
+        lblImePrezimeVlasnika.setText("Vlasnik");
 
         lblGodiste.setText("Godiste");
 
         lblMarka.setText("Marka");
 
-        cbMarke.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbVlasnik.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnSacuvaj.setText("Sacuvaj automobil");
         btnSacuvaj.addActionListener(new java.awt.event.ActionListener() {
@@ -133,6 +134,8 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
             }
         });
 
+        cbMarke.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,10 +152,11 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
                                     .addComponent(lblGodiste)
                                     .addComponent(lblImePrezimeVlasnika))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtGodiste)
-                                    .addComponent(txtImePrezimeVlasnika)
-                                    .addComponent(txtRegistarskaTablica)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtGodiste)
+                                        .addComponent(txtRegistarskaTablica)
+                                        .addComponent(cbVlasnik, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(cbMarke, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jSeparator1))
@@ -184,16 +188,16 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
                     .addComponent(txtRegistarskaTablica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtImePrezimeVlasnika, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblImePrezimeVlasnika))
+                    .addComponent(lblImePrezimeVlasnika)
+                    .addComponent(cbVlasnik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtGodiste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblGodiste))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbMarke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMarka))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMarka)
+                    .addComponent(cbMarke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -226,10 +230,10 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
      */
     private void btnSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacuvajActionPerformed
 
-        if (!txtImePrezimeVlasnika.getText().matches("^[A-Z][a-z]+(?:\\s[A-Z][a-z]+)+$")) {
-            JOptionPane.showMessageDialog(this, "Ime i prezime nije validno!", "Greska pri unosu!", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+//        if (!txtImePrezimeVlasnika.getText().matches("^[A-Z][a-z]+(?:\\s[A-Z][a-z]+)+$")) {
+//            JOptionPane.showMessageDialog(this, "Ime i prezime nije validno!", "Greska pri unosu!", JOptionPane.ERROR_MESSAGE);
+//            return;
+//        }
         if (!txtGodiste.getText().matches("^[0-9]{4}+")) {
             JOptionPane.showMessageDialog(this, "Godiste mora biti cetvorocifren broj koji predstavlja godinu!\nnpr: 2004", "Greska pri unosu!", JOptionPane.ERROR_MESSAGE);
             return;
@@ -238,15 +242,25 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Duzina registarske tablice je 8 i mora sadrzati samo velika slova i brojeve!\nnpr: PV240A50", "Greska pri unosu!", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if(cbVlasnik.getSelectedIndex()==-1){
+            JOptionPane.showMessageDialog(this, "Nista izabrali vlasnika!", "Greska pri unosu!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(cbMarke.getSelectedIndex()==-1){
+            JOptionPane.showMessageDialog(this, "Nista izabrali marku!", "Greska pri unosu!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         String tablice = txtRegistarskaTablica.getText();
-        String imePrezimeVlasnika = txtImePrezimeVlasnika.getText();
+        //String imePrezimeVlasnika = txtImePrezimeVlasnika.getText();
+        Vlasnik vlasnik = (Vlasnik) cbVlasnik.getSelectedItem();
         int godiste = Integer.parseInt(txtGodiste.getText().trim());
         Marka marka = (Marka) cbMarke.getSelectedItem();
         List<UoceniKvar> kvarovi = ((TableModelKvar) tblKvarovi.getModel()).getKvarovi();
 
         if (automobil == null) {
-            Automobil auto = new Automobil(tablice, imePrezimeVlasnika, godiste, marka, kvarovi);
+            //sacuvaj novi automobil
+            Automobil auto = new Automobil(tablice, vlasnik, godiste, marka, kvarovi);
 
             kvarovi.forEach(kvar -> {kvar.setAutomobil(auto);});
             try {
@@ -264,7 +278,7 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
             }
         } else {
             //automobil.setAutoID(tablice);
-            automobil.setImePrezimeVlasnika(imePrezimeVlasnika);
+            automobil.setVlasnik(vlasnik);
             automobil.setGodiste(godiste);
             automobil.setMarka(marka);
             automobil.setUoceniKvarovi(kvarovi);
@@ -333,6 +347,7 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
     private javax.swing.JButton btnObrisiKvar;
     private javax.swing.JButton btnSacuvaj;
     private javax.swing.JComboBox<Object> cbMarke;
+    private javax.swing.JComboBox<Object> cbVlasnik;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -342,7 +357,6 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
     private javax.swing.JLabel lblMarka;
     private javax.swing.JTable tblKvarovi;
     private javax.swing.JTextField txtGodiste;
-    private javax.swing.JTextField txtImePrezimeVlasnika;
     private javax.swing.JTextField txtRegistarskaTablica;
     // End of variables declaration//GEN-END:variables
 
@@ -355,11 +369,12 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
      */
     private void prepareView() throws Exception {
         vratiMarke();
+        vratiVlasnike();
         System.out.println("Ovo se nece izvrsiti jer izuzetak samo treba dalje baciti!");
         tblKvarovi.setModel(new TableModelKvar());
         if (automobil != null) {
             txtGodiste.setText(automobil.getGodiste() + "");
-            txtImePrezimeVlasnika.setText(automobil.getImePrezimeVlasnika());
+            cbVlasnik.setSelectedItem((Vlasnik)automobil.getVlasnik());
             txtRegistarskaTablica.setText(automobil.getTablice());
             txtRegistarskaTablica.setEditable(false);
             ((TableModelKvar) tblKvarovi.getModel()).setKvarovi(automobil.getUoceniKvarovi());
@@ -394,10 +409,23 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
     private void pripremiFormuZaNoviUnos() {
         txtRegistarskaTablica.setText("");
         txtGodiste.setText("");
-        txtImePrezimeVlasnika.setText("");
+        //txtImePrezimeVlasnika.setText("");
+        cbVlasnik.setSelectedIndex(-1);
         cbMarke.setSelectedIndex(-1);
         //sad treba da ispraznim listu kvarova
         ((TableModelKvar)tblKvarovi.getModel()).ocistiTabelu();
+    }
+
+    private void vratiVlasnike() throws Exception {
+        try {
+            Vlasnik v = new Vlasnik();
+            v.setIme("");
+            List<Vlasnik> vlasnici = Controller.getInstance().pronadjiVlasnike(v);
+            cbVlasnik.setModel(new DefaultComboBoxModel(vlasnici.toArray()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
 
 }

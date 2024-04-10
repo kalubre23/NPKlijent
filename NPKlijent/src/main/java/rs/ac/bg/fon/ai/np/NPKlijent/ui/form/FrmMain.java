@@ -21,6 +21,8 @@ import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.nalog.FrmNalogDetalji;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.nalog.FrmSviNalozi;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.pokvarendeo.FrmIzmeniPokvarenDeo;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.pokvarendeo.FrmPokvarenDeoDetalji;
+import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.vlasnik.FrmSviVlasnici;
+import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.vlasnik.FrmVlasnikDetalji;
 
 /**
  * Predstavlja glavnu graficku formu na klijentskoj strani.
@@ -80,6 +82,9 @@ public class FrmMain extends javax.swing.JFrame {
         meniNalogZaSer = new javax.swing.JMenu();
         meniItemNoviNalog = new javax.swing.JMenuItem();
         meniItemObrisiNalog = new javax.swing.JMenuItem();
+        meniVlasnik = new javax.swing.JMenu();
+        meniItemDodajVlasnika = new javax.swing.JMenuItem();
+        meniItemIzmeniVlasnika = new javax.swing.JMenuItem();
 
         jMenuItem4.setText("jMenuItem4");
 
@@ -109,7 +114,7 @@ public class FrmMain extends javax.swing.JFrame {
         jLabel3.setText("Dobro dosli u aplikaciju za auto-servis");
 
         lblNole.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNole.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rs/ac/bg/fon/ai/np/NPKlijent/ui/form/resources/slika.png"))); // NOI18N
+        lblNole.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\Documents\\NetBeansProjects\\NPProjekat\\NPKlijent\\NPKlijent\\src\\main\\resources\\images\\slika.png")); // NOI18N
 
         javax.swing.GroupLayout JPanelNoleLayout = new javax.swing.GroupLayout(JPanelNole);
         JPanelNole.setLayout(JPanelNoleLayout);
@@ -187,6 +192,26 @@ public class FrmMain extends javax.swing.JFrame {
         meniNalogZaSer.add(meniItemObrisiNalog);
 
         menuBarMain.add(meniNalogZaSer);
+
+        meniVlasnik.setText("Vlasnik");
+
+        meniItemDodajVlasnika.setText("Dodaj novog vlasnika");
+        meniItemDodajVlasnika.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meniItemDodajVlasnikaActionPerformed(evt);
+            }
+        });
+        meniVlasnik.add(meniItemDodajVlasnika);
+
+        meniItemIzmeniVlasnika.setText("Izmeni vlasnika");
+        meniItemIzmeniVlasnika.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meniItemIzmeniVlasnikaActionPerformed(evt);
+            }
+        });
+        meniVlasnik.add(meniItemIzmeniVlasnika);
+
+        menuBarMain.add(meniVlasnik);
 
         setJMenuBar(menuBarMain);
 
@@ -399,6 +424,36 @@ public class FrmMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnOdjaviSeActionPerformed
 
+    private void meniItemDodajVlasnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meniItemDodajVlasnikaActionPerformed
+        // TODO add your handling code here:
+        try {
+            JDialog dialog = new JDialog(this, "Dodaj vlasnika", true);
+            JPanel panel = new FrmVlasnikDetalji();
+            dialog.add(panel);
+            dialog.pack();
+            dialog.setLocationRelativeTo(this);
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Ne moze se prikazati forma!\n" + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_meniItemDodajVlasnikaActionPerformed
+
+    private void meniItemIzmeniVlasnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meniItemIzmeniVlasnikaActionPerformed
+        // TODO add your handling code here:
+        try {
+            JDialog dialog = new JDialog(this, "Svi vlasnici", true);
+            JPanel panel = new FrmSviVlasnici();
+            dialog.add(panel);
+            dialog.pack();
+            dialog.setLocationRelativeTo(this);
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Ne moze se prikazati forma!\n" + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_meniItemIzmeniVlasnikaActionPerformed
+
     private void postaviSliku() {
     }
 
@@ -439,14 +494,17 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JLabel lblNole;
     private javax.swing.JLabel lblServiser;
     private javax.swing.JMenu meniAuto;
+    private javax.swing.JMenuItem meniItemDodajVlasnika;
     private javax.swing.JMenuItem meniItemIzmeniAuto;
     private javax.swing.JMenuItem meniItemIzmeniPokvarenDeo;
+    private javax.swing.JMenuItem meniItemIzmeniVlasnika;
     private javax.swing.JMenuItem meniItemNoviAuto;
     private javax.swing.JMenuItem meniItemNoviNalog;
     private javax.swing.JMenuItem meniItemNoviPokvarenDeo;
     private javax.swing.JMenuItem meniItemObrisiNalog;
     private javax.swing.JMenu meniNalogZaSer;
     private javax.swing.JMenu meniPokvarenDeo;
+    private javax.swing.JMenu meniVlasnik;
     private javax.swing.JMenuBar menuBarMain;
     // End of variables declaration//GEN-END:variables
 }

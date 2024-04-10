@@ -55,7 +55,7 @@ public class TableModelAutomobil extends AbstractTableModel{
         Automobil automobil = listaAutomobila.get(rowIndex);
         
         switch(columnIndex){
-            case 0: return automobil.getImePrezimeVlasnika();
+            case 0: return automobil.getVlasnik().getIme()+" "+automobil.getVlasnik().getPrezime();
             case 1: return automobil.getGodiste();
             case 2: return automobil.getMarka();
             default: return "n\\a";

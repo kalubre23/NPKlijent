@@ -501,7 +501,7 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
     private void vratiSveAutomobile() {
         try {
             Automobil auto = new Automobil();
-            auto.setImePrezimeVlasnika("");
+            auto.setTablice("");
             listaAutomobila = Controller.getInstance().pronadjiAutomobile(auto);
             cbAutomobili.setModel(new DefaultComboBoxModel(listaAutomobila.toArray()));
             cbAutomobili.setSelectedIndex(-1);

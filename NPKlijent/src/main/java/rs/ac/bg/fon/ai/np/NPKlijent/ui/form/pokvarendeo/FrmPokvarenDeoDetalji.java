@@ -326,7 +326,7 @@ public class FrmPokvarenDeoDetalji extends javax.swing.JPanel {
     private void ucitajAutomobile() {
         try {
             Automobil auto = new Automobil();
-            auto.setImePrezimeVlasnika("");
+            auto.setTablice("");
             List<Automobil> automobili = Controller.getInstance().pronadjiAutomobile(auto);
             cbAutomobili.setModel(new DefaultComboBoxModel(automobili.toArray()));
             cbAutomobili.setSelectedIndex(-1);

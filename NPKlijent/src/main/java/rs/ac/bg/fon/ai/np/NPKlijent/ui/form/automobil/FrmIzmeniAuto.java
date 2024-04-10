@@ -55,7 +55,7 @@ public class FrmIzmeniAuto extends javax.swing.JPanel {
         btnPretrazi = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        txtImePrezimeVlasnika = new javax.swing.JTextField();
+        txtTablice = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -74,7 +74,7 @@ public class FrmIzmeniAuto extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setText("Filtriraj automobile prema vlasniku:");
+        jLabel2.setText("Filtriraj automobile prema tablicama:");
 
         jLabel3.setText("Automobili");
 
@@ -141,7 +141,7 @@ public class FrmIzmeniAuto extends javax.swing.JPanel {
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtImePrezimeVlasnika, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtTablice, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(btnPretrazi)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
@@ -157,7 +157,7 @@ public class FrmIzmeniAuto extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtImePrezimeVlasnika, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTablice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPretrazi))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -187,19 +187,20 @@ public class FrmIzmeniAuto extends javax.swing.JPanel {
      */
     private void btnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziActionPerformed
         // TODO add your handling code here:
-        if (txtImePrezimeVlasnika.getText().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Unesite ime i prezime vlasnika!", "Greska pri unosu", JOptionPane.ERROR_MESSAGE);
+        if (txtTablice.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Unesite tablice!", "Greska pri unosu", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (!txtImePrezimeVlasnika.getText().matches("[a-zA-Z]+")) {
-            JOptionPane.showMessageDialog(this, "Unesite samo slova!", "Greska pri unosu", JOptionPane.ERROR_MESSAGE);
+        if (txtTablice.getText().contains(" ")) {
+            JOptionPane.showMessageDialog(this, "Tablice ne smeju da imaju blanko znak!", "Greska pri unosu", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        String imePrezimeVlasnika = txtImePrezimeVlasnika.getText().trim();
+        //String imePrezimeVlasnika = txtImePrezimeVlasnika.getText().trim();
+        String tablice = txtTablice.getText().trim();
         try {
             Automobil auto = new Automobil();
-            auto.setImePrezimeVlasnika(imePrezimeVlasnika);
+            auto.setTablice(tablice);
             List<Automobil> listaAutomobila = Controller.getInstance().pronadjiAutomobile(auto);
             ((TableModelAutomobil) tblAutomobili.getModel()).setListaAutomobila(listaAutomobila);
             JOptionPane.showMessageDialog(this, "Sistem je nasao automobile po zadatoj vredonsti!", "Potvrda", JOptionPane.INFORMATION_MESSAGE);
@@ -276,7 +277,7 @@ public class FrmIzmeniAuto extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             Automobil auto = new Automobil();
-            auto.setImePrezimeVlasnika("");
+            auto.setTablice("");
             listaSvihAutomobila = Controller.getInstance().pronadjiAutomobile(auto);
             ((TableModelAutomobil)tblAutomobili.getModel()).setListaAutomobila(listaSvihAutomobila);
         } catch (Exception ex) {
@@ -298,7 +299,7 @@ public class FrmIzmeniAuto extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable tblAutomobili;
-    private javax.swing.JTextField txtImePrezimeVlasnika;
+    private javax.swing.JTextField txtTablice;
     // End of variables declaration//GEN-END:variables
 
     /**

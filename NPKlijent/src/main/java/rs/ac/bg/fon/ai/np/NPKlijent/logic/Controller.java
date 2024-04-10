@@ -18,6 +18,7 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.Marka;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.NalogZaServisiranje;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.PokvareniDeo;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Serviser;
+import rs.ac.bg.fon.ai.np.NPCommon.domain.Vlasnik;
 
 /**
  * Predstavlja kontrolera koji povezuje GUI i server. Implementiran kao singleton patern.
@@ -360,5 +361,57 @@ public class Controller {
             System.out.println("Socket je zatvoren kod klijenta!");
         }
     }
+
+    public void sacuvajVlasnika(Vlasnik vlasnik) throws Exception {
+        Request request = new Request(Operation.SACUVAJ_VLASNIKA, vlasnik);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() == null) {
+            System.out.println("Uspesno sacuvan vlasnik!");
+        } else {
+            throw response.getException();
+        }
+    }
+
+    public void obrisiVlasnika(Vlasnik vlasnik) throws Exception {
+        Request request = new Request(Operation.OBRISI_VLASNIKA, vlasnik);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() != null) {
+            throw response.getException();
+        }
+    }
+
+    public List<Vlasnik> pronadjiVlasnike(Vlasnik vlasnik) throws Exception {
+        Request request = new Request(Operation.PRONADJI_VLASNIKE, vlasnik);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() == null) {
+            return (List<Vlasnik>) response.getResult();
+        } else {
+            throw response.getException();
+        }
+    }
+
+    public void izmeniVlasnika(Vlasnik vlasnik) throws Exception {
+        Request request = new Request(Operation.IZMENI_VLASNIKA, vlasnik);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() != null) {
+            throw response.getException();
+        }
+    }
+
+//    public List<Vlasnik> ucitajListuVlasnika() {
+//        Request request = new Request(Operation.UCITAJ_LISTU_VLASNIKA, null);
+//        sender.send(request);
+//
+//        Response response = (Response) receiver.receive();
+//        if (response.getException() == null) {
+//            return (List<Marka>) response.getResult();
+//        } else {
+//            throw response.getException();
+//        }
+//    }
 
 }

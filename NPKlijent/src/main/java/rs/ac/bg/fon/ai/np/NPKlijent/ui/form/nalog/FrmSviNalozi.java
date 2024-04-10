@@ -4,7 +4,6 @@
  */
 package rs.ac.bg.fon.ai.np.NPKlijent.ui.form.nalog;
 
-
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,23 +17,23 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.UoceniKvar;
 import rs.ac.bg.fon.ai.np.NPKlijent.logic.Controller;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelNalog;
 
-
 /**
- * Predstavlja graficku formu za pretragu naloga za servisiranje. 
- * 
- * Pretraga se vrsi prema tablicama automobila. 
- * Za nalog koji je vracen kao rezultat pretrage se mogu videti detalji o njemu ili se moze izbrisati.
- * 
+ * Predstavlja graficku formu za pretragu naloga za servisiranje.
+ *
+ * Pretraga se vrsi prema tablicama automobila. Za nalog koji je vracen kao
+ * rezultat pretrage se mogu videti detalji o njemu ili se moze izbrisati.
+ *
  * @see NalogZaServisiranje
  * @author Luka Obrenic
  * @since 1.0.0
- * 
+ *
  */
 public class FrmSviNalozi extends javax.swing.JPanel {
 
-	/**
-	 * Lista svih naloga kao rezultat pretrage, kao lista tipa {@link NalogZaServisiranje}.
-	 */
+    /**
+     * Lista svih naloga kao rezultat pretrage, kao lista tipa
+     * {@link NalogZaServisiranje}.
+     */
     List<NalogZaServisiranje> sviNalozi;
 
     /**
@@ -172,11 +171,12 @@ public class FrmSviNalozi extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Metoda koja se poziva klikom na dugme pretrazi. Pretraga se vrsi prema tablicama automobila.
-     * 
-     * Vrsi validaciju unete vrednosti za tablice i poziva metodu kontrolera za pretragu naloga u bazi.
-     * Rezultat pretrage se prikazuje u tabeli naloga.
-     * 
+     * Metoda koja se poziva klikom na dugme pretrazi. Pretraga se vrsi prema
+     * tablicama automobila.
+     *
+     * Vrsi validaciju unete vrednosti za tablice i poziva metodu kontrolera za
+     * pretragu naloga u bazi. Rezultat pretrage se prikazuje u tabeli naloga.
+     *
      * @param evt
      */
     private void btnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziActionPerformed
@@ -213,10 +213,11 @@ public class FrmSviNalozi extends javax.swing.JPanel {
 
     /**
      * Metoda koja se poziva klikom na dugme prikazi sve.
-     * 
-     * Takodje poziva metodu kontrolera za pretragu naloga ali kao kriterijum pretrage se dodeljuje da su tablice automobila prazan string.
-     * Na taj nacin se vracaju svi nalozi iz baze. 
-     * 
+     *
+     * Takodje poziva metodu kontrolera za pretragu naloga ali kao kriterijum
+     * pretrage se dodeljuje da su tablice automobila prazan string. Na taj
+     * nacin se vracaju svi nalozi iz baze.
+     *
      * @param evt
      */
     private void btnPrikaziSveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikaziSveActionPerformed
@@ -236,9 +237,12 @@ public class FrmSviNalozi extends javax.swing.JPanel {
     }//GEN-LAST:event_btnPrikaziSveActionPerformed
 
     /**
-     * Metoda koja se poziva klikom na dugme obrisi, nakon sto je selektovan nalog dobijen iz pretrage.
-     * 
-     * Poziva metodu kontrolera za brisanje naloga iz baze. Ako je brisanje uspesno, brise nalog iz tabele koja se prikazuje.
+     * Metoda koja se poziva klikom na dugme obrisi, nakon sto je selektovan
+     * nalog dobijen iz pretrage.
+     *
+     * Poziva metodu kontrolera za brisanje naloga iz baze. Ako je brisanje
+     * uspesno, brise nalog iz tabele koja se prikazuje.
+     *
      * @param evt
      */
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
@@ -252,20 +256,22 @@ public class FrmSviNalozi extends javax.swing.JPanel {
         NalogZaServisiranje nalog = tm.getListaNaloga().get(tblNalozi.getSelectedRow());
         //ovaj nalog treba obrisati
         try {
-            throw new Exception();
-//            Controller.getInstance().obrisiNalogZaServisiranje(nalog);
+
+            Controller.getInstance().obrisiNalogZaServisiranje(nalog);
 //            //nije se desila greska
-//            JOptionPane.showMessageDialog(this, "Sistem je obrisao nalog za servisiranje!", "Potvrda", JOptionPane.INFORMATION_MESSAGE);
-//            tm.izbrisiNalog(nalog);
+            JOptionPane.showMessageDialog(this, "Sistem je obrisao nalog za servisiranje!", "Potvrda", JOptionPane.INFORMATION_MESSAGE);
+            tm.izbrisiNalog(nalog);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Sistem ne moze da obrise nalog za servisiranje!\n"/* + ex.getMessage()*/, "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnObrisiActionPerformed
 
     /**
-     * Metoda koja se poziva klikom na dugme detalji, nakon sto je selektovan nalog dobijen iz pretrage.
-     * 
+     * Metoda koja se poziva klikom na dugme detalji, nakon sto je selektovan
+     * nalog dobijen iz pretrage.
+     *
      * Otvara formu za prikaz detalja o selektovanom nalogu.
+     *
      * @param evt
      */
     private void btnDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetaljiActionPerformed

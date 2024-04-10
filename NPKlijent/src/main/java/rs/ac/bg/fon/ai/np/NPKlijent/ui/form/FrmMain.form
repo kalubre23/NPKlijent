@@ -78,6 +78,29 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="meniVlasnik">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Vlasnik"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="meniItemDodajVlasnika">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Dodaj novog vlasnika"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="meniItemDodajVlasnikaActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="meniItemIzmeniVlasnika">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Izmeni vlasnika"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="meniItemIzmeniVlasnikaActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>
@@ -248,7 +271,7 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/rs/ac/bg/fon/ai/np/NPKlijent/ui/form/resources/slika.png"/>
+              <Image iconType="2" name="C:\Users\Asus\Documents\NetBeansProjects\NPProjekat\NPKlijent\NPKlijent\src\main\resources\images\slika.png"/>
             </Property>
           </Properties>
         </Component>

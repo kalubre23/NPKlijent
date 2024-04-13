@@ -187,7 +187,11 @@ public class FrmVlasnikDetalji extends javax.swing.JPanel {
 
         if (this.vlasnik == null) {
             //dodaje se novi vlasnik
-            Vlasnik vlasnikDodaj = new Vlasnik(0, ime, prezime, email, telefon);
+            Vlasnik vlasnikDodaj = new Vlasnik();
+            vlasnikDodaj.setIme(ime);
+            vlasnikDodaj.setPrezime(prezime);
+            vlasnikDodaj.setEmail(email);
+            vlasnikDodaj.setTelefon(telefon);
 
             try {
                 Controller.getInstance().sacuvajVlasnika(vlasnikDodaj);

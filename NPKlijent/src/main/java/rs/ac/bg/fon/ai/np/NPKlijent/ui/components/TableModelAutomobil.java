@@ -31,7 +31,7 @@ public class TableModelAutomobil extends AbstractTableModel{
     /**
      * Nazivi kolona tabele kao niz stringova.
      */
-    String[] naziviKolona = {"Vlasnik", "Godiste", "Marka"};
+    String[] naziviKolona = {"Tablice", "Vlasnik", "Godiste", "Marka"};
 
     /**
      * Neparametrizovani konstruktor koji inicijalizuje listu automobila.
@@ -47,7 +47,7 @@ public class TableModelAutomobil extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 4;
     }
 
     @Override
@@ -55,9 +55,10 @@ public class TableModelAutomobil extends AbstractTableModel{
         Automobil automobil = listaAutomobila.get(rowIndex);
         
         switch(columnIndex){
-            case 0: return automobil.getVlasnik().getIme()+" "+automobil.getVlasnik().getPrezime();
-            case 1: return automobil.getGodiste();
-            case 2: return automobil.getMarka();
+            case 0: return automobil.getTablice();
+            case 1: return automobil.getVlasnik().getIme()+" "+automobil.getVlasnik().getPrezime();
+            case 2: return automobil.getGodiste();
+            case 3: return automobil.getMarka();
             default: return "n\\a";
         }
     }

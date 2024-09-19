@@ -73,12 +73,12 @@ public class FrmPokvarenDeoDetalji extends javax.swing.JPanel {
         btnPretraziDeo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPokvareniDelovi = new javax.swing.JTable();
-        btnSacuvaj1 = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JSeparator();
+        btnDodajPokvarenDeo = new javax.swing.JButton();
         lblTabelaPokvDelova = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         lblTabliceAuta = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
+        btnObrisiDeo = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -153,11 +153,23 @@ public class FrmPokvarenDeoDetalji extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblPokvareniDelovi);
 
-        btnSacuvaj1.setText("Dodaj pokvaren deo");
+        btnDodajPokvarenDeo.setText("Dodaj");
+        btnDodajPokvarenDeo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajPokvarenDeoActionPerformed(evt);
+            }
+        });
 
         lblTabelaPokvDelova.setText("Pokvareni delovi automobila: ");
 
         lblTabliceAuta.setText("jLabel8");
+
+        btnObrisiDeo.setText("Obrisi");
+        btnObrisiDeo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiDeoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -175,10 +187,10 @@ public class FrmPokvarenDeoDetalji extends javax.swing.JPanel {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbAutomobili, 0, 196, Short.MAX_VALUE)
-                            .addComponent(cbKvaroviZaAutomobil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPretraziAuto)))
+                            .addComponent(cbKvaroviZaAutomobil, 0, 333, Short.MAX_VALUE)
+                            .addComponent(cbAutomobili, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPretraziAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(227, 227, 227)
@@ -187,40 +199,41 @@ public class FrmPokvarenDeoDetalji extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator3)
-                    .addComponent(jSeparator2)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(81, 81, 81)
-                                .addComponent(jLabel5)
-                                .addGap(19, 19, 19)
-                                .addComponent(txtCenaPopravke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblTabelaPokvDelova)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSacuvaj1))
+                                .addComponent(lblTabliceAuta)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnObrisiDeo))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
+                                .addGap(6, 6, 6)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblTabelaPokvDelova)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblTabliceAuta)
-                                        .addGap(6, 6, 6))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(btnSacuvaj)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(btnNazad))
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                        .addComponent(cbDeoAutomobila, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnPretraziDeo, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtCenaPopravke, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnDodajPokvarenDeo))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSacuvaj)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbDeoAutomobila, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnPretraziDeo)))
-                        .addGap(0, 13, Short.MAX_VALUE)))
+                                .addComponent(btnNazad)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -243,31 +256,34 @@ public class FrmPokvarenDeoDetalji extends javax.swing.JPanel {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(cbDeoAutomobila, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnPretraziDeo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtCenaPopravke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(btnSacuvaj1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTabelaPokvDelova)
-                    .addComponent(lblTabliceAuta))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSacuvaj)
-                    .addComponent(btnNazad))
-                .addGap(17, 17, 17))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(cbDeoAutomobila, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPretraziDeo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtCenaPopravke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6)
+                                .addComponent(btnDodajPokvarenDeo)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSacuvaj)
+                            .addComponent(btnNazad))
+                        .addGap(15, 15, 15))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTabelaPokvDelova)
+                            .addComponent(lblTabliceAuta)
+                            .addComponent(btnObrisiDeo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(31, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -404,13 +420,69 @@ public class FrmPokvarenDeoDetalji extends javax.swing.JPanel {
         dialog.setVisible(true);
     }//GEN-LAST:event_btnPretraziDeoActionPerformed
 
+    private void btnDodajPokvarenDeoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajPokvarenDeoActionPerformed
+        // TODO add your handling code here:
+        if (cbAutomobili.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(this, "Niste izabrali automobil!", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (cbKvaroviZaAutomobil.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(this, "Niste izabrali kvar!", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (cbDeoAutomobila.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(this, "Niste izabrali deo automobila!", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (txtCenaPopravke.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Niste uneli cenu!", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!txtCenaPopravke.getText().matches("[+-]?([0-9]*[.])?[0-9]+")) {
+            JOptionPane.showMessageDialog(this, "Cena nije validna!", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        double cena = Double.parseDouble(txtCenaPopravke.getText());
+        if (cena <= 0) {
+            JOptionPane.showMessageDialog(this, "Cena mora biti veca od nule!", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        //onda se doda u tabelu pokvaren deo
+        UoceniKvar k = (UoceniKvar) cbKvaroviZaAutomobil.getSelectedItem();
+        DeoAutomobila deo = (DeoAutomobila) cbDeoAutomobila.getSelectedItem();
+        PokvareniDeo pd = new PokvareniDeo(k, deo, cena);
+        //ako ga ima vec ne sme se dodati
+        TableModelPokvarenDeo tm = (TableModelPokvarenDeo)tblPokvareniDelovi.getModel();
+        if(!tm.getListaPokvarenihDelova().contains(pd)){
+            tm.dodajPokvarenDeo(pd);
+        }else {
+            JOptionPane.showMessageDialog(this, "Vec je unet taj deo!", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    }//GEN-LAST:event_btnDodajPokvarenDeoActionPerformed
+
+    private void btnObrisiDeoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiDeoActionPerformed
+        // TODO add your handling code here:
+        if (tblPokvareniDelovi.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Niste selektovali!", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        TableModelPokvarenDeo tm = (TableModelPokvarenDeo)tblPokvareniDelovi.getModel();
+        PokvareniDeo pd = tm.getListaPokvarenihDelova().get(tblPokvareniDelovi.getSelectedRow());
+        tm.izbrisiPokvarenDeo(pd);
+    }//GEN-LAST:event_btnObrisiDeoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodajPokvarenDeo;
     private javax.swing.JButton btnNazad;
+    private javax.swing.JButton btnObrisiDeo;
     private javax.swing.JButton btnPretraziAuto;
     private javax.swing.JButton btnPretraziDeo;
     private javax.swing.JButton btnSacuvaj;
-    private javax.swing.JButton btnSacuvaj1;
     private javax.swing.JComboBox<String> cbAutomobili;
     private javax.swing.JComboBox<String> cbDeoAutomobila;
     private javax.swing.JComboBox<String> cbKvaroviZaAutomobil;
@@ -425,7 +497,6 @@ public class FrmPokvarenDeoDetalji extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lblTabelaPokvDelova;
     private javax.swing.JLabel lblTabliceAuta;
     private javax.swing.JTable tblPokvareniDelovi;
@@ -435,6 +506,7 @@ public class FrmPokvarenDeoDetalji extends javax.swing.JPanel {
     private void prepareView() {
         ucitajAutomobile();
         ucitajDeloveAutomobila();
+        tblPokvareniDelovi.setModel(new TableModelPokvarenDeo());
         
         lblTabliceAuta.setText("");
 

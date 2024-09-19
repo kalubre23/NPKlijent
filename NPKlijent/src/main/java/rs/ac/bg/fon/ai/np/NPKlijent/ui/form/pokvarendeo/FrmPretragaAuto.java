@@ -77,6 +77,11 @@ public class FrmPretragaAuto extends javax.swing.JPanel {
         });
 
         btnNazad.setText("Nazad");
+        btnNazad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNazadActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -154,6 +159,11 @@ public class FrmPretragaAuto extends javax.swing.JPanel {
         gf.postaviAutomobilCB(a);
         ((JDialog)this.getTopLevelAncestor()).dispose();
     }//GEN-LAST:event_btnOdaberiActionPerformed
+
+    private void btnNazadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNazadActionPerformed
+        // TODO add your handling code here:
+        ((JDialog)this.getTopLevelAncestor()).dispose();
+    }//GEN-LAST:event_btnNazadActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

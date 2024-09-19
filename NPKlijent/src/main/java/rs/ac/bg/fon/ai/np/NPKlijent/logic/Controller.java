@@ -221,8 +221,8 @@ public class Controller {
      * @param pokvareniDeo koga treba sacuvati u bazi, tipa {@link PokvareniDeo}
      * @throws Exception ako je doslo do greske na serveru
      */
-    public void sacuvajPokvareniDeo(PokvareniDeo pokvareniDeo) throws Exception {
-        Request request = new Request(Operation.SACUVAJ_POKVAREN_DEO, pokvareniDeo);
+    public void sacuvajPokvareneDelove(List<PokvareniDeo> listaDelova) throws Exception {
+        Request request = new Request(Operation.SACUVAJ_POKVAREN_DEO, listaDelova);
         sender.send(request);
         Response response = (Response) receiver.receive();
         if (response.getException() == null) {

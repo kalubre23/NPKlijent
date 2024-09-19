@@ -116,4 +116,8 @@ public class TableModelPokvarenDeo extends AbstractTableModel{
         listaPokvarenihDelova.clear();
         fireTableDataChanged();
     }
+    
+    public void refresh(){
+        fireTableDataChanged();
+    }
 }

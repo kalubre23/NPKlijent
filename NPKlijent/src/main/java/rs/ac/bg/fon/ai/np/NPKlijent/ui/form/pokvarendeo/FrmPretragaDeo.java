@@ -18,13 +18,13 @@ import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelDeo;
 public class FrmPretragaDeo extends javax.swing.JPanel {
 
     List<DeoAutomobila> delovi;
-    FrmPokvarenDeoDetalji gf;
+    FrmPokvarenDeo gf;
     
 
     /**
      * Creates new form FrmPretragaDeo
      */
-    public FrmPretragaDeo(FrmPokvarenDeoDetalji gf, List<DeoAutomobila> delovi) {
+    public FrmPretragaDeo(FrmPokvarenDeo gf, List<DeoAutomobila> delovi) {
         initComponents();
         this.gf = gf;
         this.delovi = delovi;

@@ -18,11 +18,11 @@ import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelAutomobil;
 public class FrmPretragaAuto extends javax.swing.JPanel {
 
     List<Automobil> automobili;
-    FrmPokvarenDeoDetalji gf;
+    FrmPokvarenDeo gf;
     /**
      * Creates new form FrmPretragaAuto
      */
-    public FrmPretragaAuto(FrmPokvarenDeoDetalji gf, List<Automobil> automobili) {
+    public FrmPretragaAuto(FrmPokvarenDeo gf, List<Automobil> automobili) {
         initComponents();
         this.gf = gf;
         this.automobili = automobili;

@@ -20,7 +20,7 @@ import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.automobil.FrmIzmeniAuto;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.nalog.FrmNalogDetalji;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.nalog.FrmSviNalozi;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.pokvarendeo.FrmIzmeniPokvarenDeo;
-import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.pokvarendeo.FrmPokvarenDeoDetalji;
+import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.pokvarendeo.FrmPokvarenDeo;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.vlasnik.FrmSviVlasnici;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.vlasnik.FrmVlasnikDetalji;
 
@@ -321,14 +321,14 @@ public class FrmMain extends javax.swing.JFrame {
      * Metoda koja se poziva klikom na meni stavku dodaj pokvareni deo.
      * 
      * Otvara formu za rad sa pokvarenim delom.
-     * @see FrmPokvarenDeoDetalji
+     * @see FrmPokvarenDeo
      * @param evt
      */
     private void meniItemNoviPokvarenDeoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meniItemNoviPokvarenDeoActionPerformed
         // TODO add your handling code here:
         try {
-            JDialog dialog = new JDialog(this, "Dodaj pokvaren deo", true);
-            JPanel panel = new FrmPokvarenDeoDetalji();
+            JDialog dialog = new JDialog(this, "Dodaj pokvarene delove", true);
+            JPanel panel = new FrmPokvarenDeo();
             dialog.add(panel);
             dialog.pack();
             dialog.setLocationRelativeTo(this);

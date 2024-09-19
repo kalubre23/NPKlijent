@@ -4,41 +4,24 @@
  */
 package rs.ac.bg.fon.ai.np.NPKlijent.ui.form.pokvarendeo;
 
-
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
-import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
-import rs.ac.bg.fon.ai.np.NPCommon.domain.DeoAutomobila;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.PokvareniDeo;
-import rs.ac.bg.fon.ai.np.NPCommon.domain.UoceniKvar;
 import rs.ac.bg.fon.ai.np.NPKlijent.logic.Controller;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelPokvarenDeo;
-
 
 /**
  *
  * @author Asus
  */
 public class FrmPokvarenDeoDetalji extends javax.swing.JPanel {
-
-    PokvareniDeo pokvareniDeo;
+    
+    private PokvareniDeo pokvareniDeo;
     TableModelPokvarenDeo tm;
-    List<Automobil> automobili;
-    List<DeoAutomobila> deloviAutomobila;
+    
     /**
      * Creates new form FrmPokvarenDeoDetalji
      */
-    public FrmPokvarenDeoDetalji() {
-        initComponents();
-        prepareView();
-    }
-
     public FrmPokvarenDeoDetalji(PokvareniDeo pokvareniDeo, TableModelPokvarenDeo tm) {
         initComponents();
         this.pokvareniDeo = pokvareniDeo;
@@ -55,67 +38,38 @@ public class FrmPokvarenDeoDetalji extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
+        lblAutomobil = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        cbDeoAutomobila = new javax.swing.JComboBox<>();
+        lblKvar = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        cbAutomobili = new javax.swing.JComboBox<>();
+        lblDeo = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        cbKvaroviZaAutomobil = new javax.swing.JComboBox<>();
+        txtCena = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtCenaPopravke = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        btnSacuvaj = new javax.swing.JButton();
+        btnIzmeniCenu = new javax.swing.JButton();
         btnNazad = new javax.swing.JButton();
-        btnPretraziAuto = new javax.swing.JButton();
-        btnPretraziDeo = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblPokvareniDelovi = new javax.swing.JTable();
-        btnDodajPokvarenDeo = new javax.swing.JButton();
-        lblTabelaPokvDelova = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        lblTabliceAuta = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
-        btnObrisiDeo = new javax.swing.JButton();
 
-        jButton1.setText("jButton1");
+        jLabel1.setText("Automobil:");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("Pokvaren deo");
+        lblAutomobil.setText("jLabel2");
 
-        jLabel2.setText("Izaberi pokvaren deo ");
+        jLabel2.setText("Kvar:");
 
-        cbDeoAutomobila.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        lblKvar.setText("jLabel2");
 
-        jLabel3.setText("Izaberi automobil");
+        jLabel3.setText("Deo automobila:");
 
-        cbAutomobili.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbAutomobili.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbAutomobiliItemStateChanged(evt);
-            }
-        });
+        lblDeo.setText("jLabel2");
 
-        jLabel4.setText("Izaberi kvar za taj automobil");
+        jLabel4.setText("Cena:");
 
-        cbKvaroviZaAutomobil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbKvaroviZaAutomobil.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbKvaroviZaAutomobilItemStateChanged(evt);
-            }
-        });
+        jLabel5.setText("€");
 
-        jLabel5.setText("Cena popravke");
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setText("€");
-
-        btnSacuvaj.setText("Sacuvaj");
-        btnSacuvaj.addActionListener(new java.awt.event.ActionListener() {
+        btnIzmeniCenu.setText("Izmeni cenu");
+        btnIzmeniCenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSacuvajActionPerformed(evt);
+                btnIzmeniCenuActionPerformed(evt);
             }
         });
 
@@ -126,437 +80,122 @@ public class FrmPokvarenDeoDetalji extends javax.swing.JPanel {
             }
         });
 
-        btnPretraziAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-search-20.png"))); // NOI18N
-        btnPretraziAuto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPretraziAutoActionPerformed(evt);
-            }
-        });
-
-        btnPretraziDeo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-search-20.png"))); // NOI18N
-        btnPretraziDeo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPretraziDeoActionPerformed(evt);
-            }
-        });
-
-        tblPokvareniDelovi.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tblPokvareniDelovi);
-
-        btnDodajPokvarenDeo.setText("Dodaj");
-        btnDodajPokvarenDeo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDodajPokvarenDeoActionPerformed(evt);
-            }
-        });
-
-        lblTabelaPokvDelova.setText("Pokvareni delovi automobila: ");
-
-        lblTabliceAuta.setText("jLabel8");
-
-        btnObrisiDeo.setText("Obrisi");
-        btnObrisiDeo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnObrisiDeoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblKvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblAutomobil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDeo, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtCena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnIzmeniCenu)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbKvaroviZaAutomobil, 0, 333, Short.MAX_VALUE)
-                            .addComponent(cbAutomobili, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPretraziAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(227, 227, 227)
-                .addComponent(jLabel7)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblTabelaPokvDelova)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblTabliceAuta)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnObrisiDeo))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cbDeoAutomobila, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnPretraziDeo, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtCenaPopravke, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnDodajPokvarenDeo))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnSacuvaj)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnNazad)))))
+                        .addComponent(btnNazad)
+                        .addGap(145, 145, 145)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblAutomobil))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lblKvar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(cbAutomobili, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPretraziAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblDeo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(cbKvaroviZaAutomobil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(cbDeoAutomobila, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPretraziDeo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtCenaPopravke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6)
-                                .addComponent(btnDodajPokvarenDeo)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSacuvaj)
-                            .addComponent(btnNazad))
-                        .addGap(15, 15, 15))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTabelaPokvDelova)
-                            .addComponent(lblTabliceAuta)
-                            .addComponent(btnObrisiDeo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(31, Short.MAX_VALUE))))
+                    .addComponent(txtCena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnIzmeniCenu)
+                    .addComponent(btnNazad))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cbKvaroviZaAutomobilItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbKvaroviZaAutomobilItemStateChanged
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_cbKvaroviZaAutomobilItemStateChanged
-
-    private void cbAutomobiliItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbAutomobiliItemStateChanged
-        // TODO add your handling code here:
-        if (cbAutomobili.getSelectedIndex() == -1) {
-            return;
-        }
-        Automobil auto = (Automobil) cbAutomobili.getSelectedItem();
-        lblTabliceAuta.setText(auto.getTablice());
-        cbKvaroviZaAutomobil.setModel(new DefaultComboBoxModel(auto.getUoceniKvarovi().toArray()));
-
-    }//GEN-LAST:event_cbAutomobiliItemStateChanged
 
     private void btnNazadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNazadActionPerformed
         // TODO add your handling code here:
         ((JDialog) this.getTopLevelAncestor()).dispose();
     }//GEN-LAST:event_btnNazadActionPerformed
 
-    private void btnSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacuvajActionPerformed
+    private void btnIzmeniCenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniCenuActionPerformed
         // TODO add your handling code here:
-        if (cbAutomobili.getSelectedIndex() == -1) {
-            JOptionPane.showMessageDialog(this, "Niste izabrali automobil!", "Greska", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (cbKvaroviZaAutomobil.getSelectedIndex() == -1) {
-            JOptionPane.showMessageDialog(this, "Niste izabrali kvar!", "Greska", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (cbDeoAutomobila.getSelectedIndex() == -1) {
-            JOptionPane.showMessageDialog(this, "Niste izabrali deo automobila!", "Greska", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (txtCenaPopravke.getText().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Niste uneli cenu!", "Greska", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (!txtCenaPopravke.getText().matches("[+-]?([0-9]*[.])?[0-9]+")) {
-            JOptionPane.showMessageDialog(this, "Unesite samo brojeve za cenu!", "Greska", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        double cena = Double.parseDouble(txtCenaPopravke.getText());
-        if (cena <= 0) {
-            JOptionPane.showMessageDialog(this, "Cena mora biti veca od nule!", "Greska", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (pokvareniDeo == null) {
-            UoceniKvar k = (UoceniKvar) cbKvaroviZaAutomobil.getSelectedItem();
-            DeoAutomobila deo = (DeoAutomobila) cbDeoAutomobila.getSelectedItem();
-            PokvareniDeo pokvareniDeo = new PokvareniDeo(k, deo, cena);
-            try {
-                
-                Controller.getInstance().sacuvajPokvareniDeo(pokvareniDeo);
-                //nije puklo
-                JOptionPane.showMessageDialog(this, "Sistem je zapamtio pokvareni deo!", "Potvrda", JOptionPane.INFORMATION_MESSAGE);
-                int opcija = JOptionPane.showConfirmDialog(this, "Nastavi unos?", "Potvrda", JOptionPane.YES_NO_OPTION);
-                if (opcija == JOptionPane.YES_OPTION) {
-                    pripremiFormuZaNoviUnos();
-                } else {
-                    ((JDialog) this.getTopLevelAncestor()).dispose();
-                }
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Sistem ne moze da zapamti pokvaren deo!\n"+ ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
-
-            }
-        } else {
-            //prvo zapamti stare vrednosti
-//            String stareTablice = pokvareniDeo.getUoceniKvar().getAutomobil().getTablice();
-//            int stariKvarID = pokvareniDeo.getUoceniKvar().getKvarID();
-//            int stariDeoID = pokvareniDeo.getDeo().getDeoID();
-
-            //ipak bi dobrodosla tabela prvo da vidi dal ga nema
-            //List<PokvareniDeo> delovi = ((TableModelPokvarenDeo) frm.getTblPokvareniDelovi().getModel()).getListaPokvarenihDelova();
-            //ovde ne smem da menjam ovaj nego novi koji cu uporediti sa ovim
-            PokvareniDeo deoNovi = new PokvareniDeo((UoceniKvar) cbKvaroviZaAutomobil.getSelectedItem(), (DeoAutomobila) cbDeoAutomobila.getSelectedItem(), cena);
-            //ovo u valdiate izvrsi
-//            if (delovi.contains(deoNovi)) {
-//                JOptionPane.showMessageDialog(this, "Greska!\nVec postoji takav pokvaren deo.", "Greska", JOptionPane.ERROR_MESSAGE);
-//                //((JDialog)this.getTopLevelAncestor()).dispose();
-//                return;
-//            }
-            deoNovi.setUsloviZaUpdate(pokvareniDeo.getUoceniKvar().getAutomobil().getTablice(), pokvareniDeo.getUoceniKvar().getKvarID(), pokvareniDeo.getDeo().getDeoID());
-//            pokvareniDeo.setUoceniKvar((UoceniKvar) cbKvaroviZaAutomobil.getSelectedItem());
-//            pokvareniDeo.setDeo((DeoAutomobila) cbDeoAutomobila.getSelectedItem());
-//            pokvareniDeo.setCena(cena);
-
-//            if(frm.getListaSvihPokvarenihDelova().contains(pokvareniDeo)){
-//                JOptionPane.showMessageDialog(this, "Greska!\nVec postoji takav pokvaren deo.", "Greska", JOptionPane.ERROR_MESSAGE);
-//                return;
-//            }else{
-//            }
-            //ne mora ova provera iznad jer ce baza proveriti dal vec postoji
-            try {
-                
-                Controller.getInstance().izmeniPokvareniDeo(deoNovi);
-                JOptionPane.showMessageDialog(this, "Sistem je izmenio pokvareni deo!", "Potvrda", JOptionPane.INFORMATION_MESSAGE);
-                //pokvareniDeo = deoNovi;
-                tm.izbrisiPokvarenDeo(pokvareniDeo);
-                tm.dodajPokvarenDeo(deoNovi);
-                ((JDialog)this.getTopLevelAncestor()).dispose();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Sistem ne moze da zapamti pokvaren deo!\n"/* + ex.getMessage()*/, "Greska", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-
-    }//GEN-LAST:event_btnSacuvajActionPerformed
-
-    private void btnPretraziAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziAutoActionPerformed
-        // TODO add your handling code here:
-        JDialog dialog = new JDialog((JDialog) this.getTopLevelAncestor(), "Odaberi automobil", true);
-        JPanel frmPretragaAuto = new FrmPretragaAuto((FrmPokvarenDeoDetalji) this, this.automobili);
-        dialog.add(frmPretragaAuto);
-        dialog.pack();
-        dialog.setLocationRelativeTo(this);
-        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        dialog.setVisible(true);
-    }//GEN-LAST:event_btnPretraziAutoActionPerformed
-
-    private void btnPretraziDeoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziDeoActionPerformed
-        // TODO add your handling code here:
-        JDialog dialog = new JDialog((JDialog) this.getTopLevelAncestor(), "Odaberi deo automobila", true);
-        JPanel frmPretragaDeo = new FrmPretragaDeo((FrmPokvarenDeoDetalji) this, this.deloviAutomobila);
-        dialog.add(frmPretragaDeo);
-        dialog.pack();
-        dialog.setLocationRelativeTo(this);
-        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        dialog.setVisible(true);
-    }//GEN-LAST:event_btnPretraziDeoActionPerformed
-
-    private void btnDodajPokvarenDeoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajPokvarenDeoActionPerformed
-        // TODO add your handling code here:
-        if (cbAutomobili.getSelectedIndex() == -1) {
-            JOptionPane.showMessageDialog(this, "Niste izabrali automobil!", "Greska", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (cbKvaroviZaAutomobil.getSelectedIndex() == -1) {
-            JOptionPane.showMessageDialog(this, "Niste izabrali kvar!", "Greska", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (cbDeoAutomobila.getSelectedIndex() == -1) {
-            JOptionPane.showMessageDialog(this, "Niste izabrali deo automobila!", "Greska", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (txtCenaPopravke.getText().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Niste uneli cenu!", "Greska", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (!txtCenaPopravke.getText().matches("[+-]?([0-9]*[.])?[0-9]+")) {
+        if (!txtCena.getText().matches("[+-]?([0-9]*[.])?[0-9]+")) {
             JOptionPane.showMessageDialog(this, "Cena nije validna!", "Greska", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        double cena = Double.parseDouble(txtCenaPopravke.getText());
+        double cena = Double.parseDouble(txtCena.getText());
         if (cena <= 0) {
             JOptionPane.showMessageDialog(this, "Cena mora biti veca od nule!", "Greska", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        //onda se doda u tabelu pokvaren deo
-        UoceniKvar k = (UoceniKvar) cbKvaroviZaAutomobil.getSelectedItem();
-        DeoAutomobila deo = (DeoAutomobila) cbDeoAutomobila.getSelectedItem();
-        PokvareniDeo pd = new PokvareniDeo(k, deo, cena);
-        //ako ga ima vec ne sme se dodati
-        TableModelPokvarenDeo tm = (TableModelPokvarenDeo)tblPokvareniDelovi.getModel();
-        if(!tm.getListaPokvarenihDelova().contains(pd)){
-            tm.dodajPokvarenDeo(pd);
+        if(cena == this.pokvareniDeo.getCena()){
+            ((JDialog) this.getTopLevelAncestor()).dispose();
         }else {
-            JOptionPane.showMessageDialog(this, "Vec je unet taj deo!", "Greska", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-    }//GEN-LAST:event_btnDodajPokvarenDeoActionPerformed
-
-    private void btnObrisiDeoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiDeoActionPerformed
-        // TODO add your handling code here:
-        if (tblPokvareniDelovi.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(this, "Niste selektovali!", "Greska", JOptionPane.ERROR_MESSAGE);
-            return;
+            //ovde treba izmena
+            try {
+                this.pokvareniDeo.setUsloviZaUpdate(this.pokvareniDeo.getUoceniKvar().getAutomobil().getTablice(), this.pokvareniDeo.getUoceniKvar().getKvarID(), pokvareniDeo.getDeo().getDeoID());
+                this.pokvareniDeo.setCena(cena);
+                Controller.getInstance().izmeniPokvareniDeo(this.pokvareniDeo);
+                JOptionPane.showMessageDialog(this, "Sistem je izmenio pokvareni deo!", "Potvrda", JOptionPane.INFORMATION_MESSAGE);
+                ((JDialog)this.getTopLevelAncestor()).dispose();
+                tm.refresh();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Sistem ne moze da zapamti pokvaren deo!\n"/* + ex.getMessage()*/, "Greska", JOptionPane.ERROR_MESSAGE);
+            }
         }
         
-        TableModelPokvarenDeo tm = (TableModelPokvarenDeo)tblPokvareniDelovi.getModel();
-        PokvareniDeo pd = tm.getListaPokvarenihDelova().get(tblPokvareniDelovi.getSelectedRow());
-        tm.izbrisiPokvarenDeo(pd);
-    }//GEN-LAST:event_btnObrisiDeoActionPerformed
+    }//GEN-LAST:event_btnIzmeniCenuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDodajPokvarenDeo;
+    private javax.swing.JButton btnIzmeniCenu;
     private javax.swing.JButton btnNazad;
-    private javax.swing.JButton btnObrisiDeo;
-    private javax.swing.JButton btnPretraziAuto;
-    private javax.swing.JButton btnPretraziDeo;
-    private javax.swing.JButton btnSacuvaj;
-    private javax.swing.JComboBox<String> cbAutomobili;
-    private javax.swing.JComboBox<String> cbDeoAutomobila;
-    private javax.swing.JComboBox<String> cbKvaroviZaAutomobil;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel lblTabelaPokvDelova;
-    private javax.swing.JLabel lblTabliceAuta;
-    private javax.swing.JTable tblPokvareniDelovi;
-    private javax.swing.JTextField txtCenaPopravke;
+    private javax.swing.JLabel lblAutomobil;
+    private javax.swing.JLabel lblDeo;
+    private javax.swing.JLabel lblKvar;
+    private javax.swing.JTextField txtCena;
     // End of variables declaration//GEN-END:variables
 
     private void prepareView() {
-        ucitajAutomobile();
-        ucitajDeloveAutomobila();
-        tblPokvareniDelovi.setModel(new TableModelPokvarenDeo());
-        
-        lblTabliceAuta.setText("");
-
-        if (pokvareniDeo != null) {
-            cbAutomobili.setSelectedItem(pokvareniDeo.getUoceniKvar().getAutomobil());
-            cbKvaroviZaAutomobil.setSelectedItem(pokvareniDeo.getUoceniKvar());
-            //cbAutomobili.setEnabled(false);
-            //cbKvaroviZaAutomobil.setEnabled(false);
-            cbDeoAutomobila.setSelectedItem(pokvareniDeo.getDeo());
-            //cbDeoAutomobila.setEnabled(false);
-            txtCenaPopravke.setText(String.valueOf(pokvareniDeo.getCena()));
-        }
-    }
-
-    private void ucitajAutomobile() {
-        try {
-            Automobil auto = new Automobil();
-            auto.setTablice("");
-            automobili = Controller.getInstance().pronadjiAutomobile(auto);
-            cbAutomobili.setModel(new DefaultComboBoxModel(automobili.toArray()));
-            cbAutomobili.setSelectedIndex(-1);
-            cbKvaroviZaAutomobil.removeAllItems();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Greski pri ucitavanju automobila!", "Greska", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void ucitajDeloveAutomobila() {
-        try {
-            deloviAutomobila = Controller.getInstance().ucitajListuDelovaAutomobila();
-            cbDeoAutomobila.setModel(new DefaultComboBoxModel(deloviAutomobila.toArray()));
-            cbDeoAutomobila.setSelectedIndex(-1);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Greska pri ucitavanju delova automobila!", "Greska", JOptionPane.ERROR_MESSAGE);
-        }
-
-    }
-
-    private void pripremiFormuZaNoviUnos() {
-        cbAutomobili.setSelectedIndex(-1);
-        cbKvaroviZaAutomobil.setSelectedIndex(-1);
-        cbDeoAutomobila.setSelectedIndex(-1);
-        txtCenaPopravke.setText("");
-    }
-    
-    void postaviAutomobilCB(Automobil a){
-        cbAutomobili.setSelectedItem(a);
-    }
-
-    void postaviDeoCB(DeoAutomobila d) {
-        cbDeoAutomobila.setSelectedItem(d);
+        lblAutomobil.setText(this.pokvareniDeo.getUoceniKvar().getAutomobil().toString());
+        lblKvar.setText(this.pokvareniDeo.getUoceniKvar().getOpis());
+        lblDeo.setText(this.pokvareniDeo.getDeo().getNaziv());
+        txtCena.setText(this.pokvareniDeo.getCena()+"");
     }
 }

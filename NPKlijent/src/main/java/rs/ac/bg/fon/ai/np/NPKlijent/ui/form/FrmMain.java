@@ -13,7 +13,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import rs.ac.bg.fon.ai.np.NPCommon.domain.Serviser;
+import rs.ac.bg.fon.ai.np.NPCommon.domain.Korisnik;
 import rs.ac.bg.fon.ai.np.NPKlijent.logic.Controller;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.automobil.FrmAutoDetalji;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.automobil.FrmIzmeniAuto;
@@ -36,21 +36,21 @@ import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.vlasnik.FrmVlasnikDetalji;
 public class FrmMain extends javax.swing.JFrame {
 
 	/**
-	 * Serviser koji je ulogovan u sistem tipa {@link Serviser}.
+	 * Serviser koji je ulogovan u sistem tipa {@link Korisnik}.
 	 */
-    private Serviser serviser;
+    private Korisnik korisnik;
 
     /**
      * Kreira novu formu FrmMain. Centrira je, postavlja naslov, sliku i datum.
      */
-    public FrmMain(Serviser serviser) {
-        this.serviser = serviser;
+    public FrmMain(Korisnik korisnik) {
+        this.korisnik = korisnik;
         initComponents();
         setTitle("Auto-servis");
         setLocationRelativeTo(null);
         //setExtendedState(JFrame.MAXIMIZED_BOTH);
         new DatumVremeNit().start();
-        lblServiser.setText(this.serviser.getUsername());
+        lblServiser.setText(this.korisnik.getUsername()+" ("+this.korisnik.getUloga().getUloga()+")");
         postaviSliku();
     }
 
@@ -91,7 +91,7 @@ public class FrmMain extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setText("Ulogovani serviser:");
+        jLabel1.setText("Ulogovani korisnik:");
 
         lblServiser.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblServiser.setText("jLabel2");
@@ -372,7 +372,7 @@ public class FrmMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             JDialog dialog = new JDialog(this, "Dodaj nalog za servisiranje", true);
-            JPanel panel = new FrmNalogDetalji(this.serviser);
+            JPanel panel = new FrmNalogDetalji(this.korisnik);
             dialog.add(panel);
             dialog.pack();
             dialog.setLocationRelativeTo(this);
@@ -415,7 +415,7 @@ public class FrmMain extends javax.swing.JFrame {
     private void btnOdjaviSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdjaviSeActionPerformed
         try {
             // TODO add your handling code here:
-            Controller.getInstance().logout(this.serviser);
+            Controller.getInstance().logout(this.korisnik);
             this.setVisible(false);
             System.exit(0);
         } catch (Exception ex) {

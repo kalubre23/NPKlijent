@@ -58,7 +58,7 @@ public class TableModelNalog extends AbstractTableModel{
         switch(columnIndex){
             case 0: return n.getKvar().getAutomobil().getTablice();
             case 1: return n.getKvar().getOpis();
-            case 2: return n.getDatum();
+            case 2: return n.getDatumKreiranja();
             case 3: return n.getCena();
             default: return "n\\a";
         }

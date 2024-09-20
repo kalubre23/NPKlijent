@@ -7,7 +7,8 @@ package rs.ac.bg.fon.ai.np.NPKlijent.ui.form;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import rs.ac.bg.fon.ai.np.NPCommon.domain.Serviser;
+import rs.ac.bg.fon.ai.np.NPCommon.domain.Korisnik;
+import rs.ac.bg.fon.ai.np.NPCommon.domain.Uloga;
 import rs.ac.bg.fon.ai.np.NPKlijent.logic.Controller;
 
 /**
@@ -38,6 +39,7 @@ public class FrmLogin extends javax.swing.JPanel {
         btnLogin = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
+        checkAdmin = new javax.swing.JCheckBox();
 
         lblUsername.setText("Username:");
 
@@ -63,6 +65,8 @@ public class FrmLogin extends javax.swing.JPanel {
             }
         });
 
+        checkAdmin.setText("Uloguj se kao admin");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -70,20 +74,23 @@ public class FrmLogin extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnLogin)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCancel)
+                        .addGap(1, 1, 1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblUsername)
                             .addComponent(lblPassword))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(checkAdmin)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-                            .addComponent(txtPassword)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnLogin)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancel)
-                        .addGap(1, 1, 1)))
+                            .addComponent(txtPassword))))
                 .addGap(52, 52, 52))
         );
         layout.setVerticalGroup(
@@ -97,11 +104,13 @@ public class FrmLogin extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPassword)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(checkAdmin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
                     .addComponent(btnCancel))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -114,12 +123,25 @@ public class FrmLogin extends javax.swing.JPanel {
      */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         try {
-            //Controller controller=new Controller();
-            Serviser serviser=new Serviser(txtUsername.getText(), new String(txtPassword.getPassword()));
-            //user=controller.login(user);
-            serviser=Controller.getInstance().login(serviser);
-            JOptionPane.showMessageDialog(this, serviser.getIme()+" se ulogovao!", "Prijava na sistem", JOptionPane.INFORMATION_MESSAGE);
-            JFrame frame=new FrmMain(serviser);
+            if(txtPassword.getText().isBlank() || txtUsername.getText().isBlank()){
+                JOptionPane.showMessageDialog(this, "Invalidni username i password", "Greska", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            Korisnik korisnik = new Korisnik(txtUsername.getText(), new String(txtPassword.getPassword()));
+            Uloga u = new Uloga();
+            if(checkAdmin.isSelected()){
+                System.out.println("Selektovan!");
+                u.setUloga("admin");
+                korisnik.setUloga(u);
+            }else {
+                u.setUloga("serviser");
+                korisnik.setUloga(u);
+            }
+            korisnik=Controller.getInstance().login(korisnik);
+            JOptionPane.showMessageDialog(this, korisnik.getIme()+" se ulogovao!", "Prijava na sistem", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println(korisnik);
+            
+            JFrame frame = new FrmMain(korisnik);
             this.getTopLevelAncestor().setVisible(false);
             frame.setVisible(true);
         } catch (Exception ex) {
@@ -145,6 +167,7 @@ public class FrmLogin extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnLogin;
+    private javax.swing.JCheckBox checkAdmin;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JPasswordField txtPassword;

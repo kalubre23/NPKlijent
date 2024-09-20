@@ -17,7 +17,7 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.DeoAutomobila;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Marka;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.NalogZaServisiranje;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.PokvareniDeo;
-import rs.ac.bg.fon.ai.np.NPCommon.domain.Serviser;
+import rs.ac.bg.fon.ai.np.NPCommon.domain.Korisnik;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Vlasnik;
 
 /**
@@ -87,13 +87,13 @@ public class Controller {
      * @return serviser koga je vratio server, login uspesan
      * @throws Exception ako je login neuspesan
      */
-    public Serviser login(Serviser serviser) throws Exception {
+    public Korisnik login(Korisnik serviser) throws Exception {
         Request request = new Request(Operation.LOGIN, serviser);
         sender.send(request);
 
         Response response = (Response) receiver.receive();
         if (response.getException() == null) {
-            return (Serviser) response.getResult();
+            return (Korisnik) response.getResult();
         } else {
             throw response.getException();
         }
@@ -352,7 +352,7 @@ public class Controller {
      * @param serviser koga treba izlogovati
      * @throws Exception ako se desi greska na strani servera
      */
-    public void logout(Serviser serviser) throws Exception {
+    public void logout(Korisnik serviser) throws Exception {
         Request request = new Request(Operation.LOGOUT, serviser);
         sender.send(request);
         //zatvori socket
@@ -413,5 +413,16 @@ public class Controller {
 //            throw response.getException();
 //        }
 //    }
+
+    public List<Korisnik> vratiSveServisere() throws Exception {
+        Request request = new Request(Operation.VRATI_SVE_SERVISERE, null);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() == null) {
+            return (List<Korisnik>) response.getResult();
+        } else {
+            throw response.getException();
+        }
+    }
 
 }

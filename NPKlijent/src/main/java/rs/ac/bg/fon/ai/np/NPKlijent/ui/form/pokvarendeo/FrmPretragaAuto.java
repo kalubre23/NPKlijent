@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelAutomobil;
+import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.nalog.FrmNalogDetalji;
 
 /**
  *
@@ -18,11 +20,11 @@ import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelAutomobil;
 public class FrmPretragaAuto extends javax.swing.JPanel {
 
     List<Automobil> automobili;
-    FrmPokvarenDeo gf;
+    JPanel gf;
     /**
      * Creates new form FrmPretragaAuto
      */
-    public FrmPretragaAuto(FrmPokvarenDeo gf, List<Automobil> automobili) {
+    public FrmPretragaAuto(JPanel gf, List<Automobil> automobili) {
         initComponents();
         this.gf = gf;
         this.automobili = automobili;
@@ -156,7 +158,12 @@ public class FrmPretragaAuto extends javax.swing.JPanel {
         TableModelAutomobil tm = (TableModelAutomobil)jTable1.getModel();
         Automobil a = tm.getListaAutomobila().get(jTable1.getSelectedRow());
         //sad treba da se odabere u cb
-        gf.postaviAutomobilCB(a);
+        if(gf instanceof FrmNalogDetalji){
+            ((FrmNalogDetalji)gf).postaviAutomobilCB(a);  
+        }
+        if(gf instanceof FrmPokvarenDeo){
+            ((FrmPokvarenDeo)gf).postaviAutomobilCB(a);  
+        }
         ((JDialog)this.getTopLevelAncestor()).dispose();
     }//GEN-LAST:event_btnOdaberiActionPerformed
 

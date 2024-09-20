@@ -17,14 +17,17 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.NalogZaServisiranje;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.PokvareniDeo;
-import rs.ac.bg.fon.ai.np.NPCommon.domain.Serviser;
+import rs.ac.bg.fon.ai.np.NPCommon.domain.Korisnik;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.UoceniKvar;
 import rs.ac.bg.fon.ai.np.NPKlijent.logic.Controller;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelPokvarenDeo;
+import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.pokvarendeo.FrmPokvarenDeo;
+import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.pokvarendeo.FrmPretragaAuto;
 
 
 /**
@@ -50,14 +53,17 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
      * Lista svih pokvarenih delova za odabrani automobil, kao lista tipa {@link PokvareniDeo}.
      */
     List<PokvareniDeo> listaPokvarenihDelova;
+    
+    List<Korisnik> listaServisera;
+    
     /**
      * Ukupna cena servisa.
      */
     double konacnaCena;
     /**
-     * Serviser koji zakljucuje nalog, tipa {@link Serviser}.
+     * Serviser koji zakljucuje nalog, tipa {@link Korisnik}.
      */
-    Serviser serviser;
+    Korisnik serviser;
     /**
      * Nalog koji sluzi samo za prikaz podataka o njemu (read-only), ukoliko se forma koristi za to. Tipa je {@link NalogZaServisiranje}.
      */
@@ -68,9 +74,9 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
      * 
      * Ovaj konstruktor se koristi ukoliko se kreira novi nalog za servisiranje.
      * 
-     * @param serviser koji zakljucuje nalog, koji se dodeljuje atributu serviser, tipa {@link Serviser}.
+     * @param serviser koji zakljucuje nalog, koji se dodeljuje atributu serviser, tipa {@link Korisnik}.
      */
-    public FrmNalogDetalji(Serviser serviser) {
+    public FrmNalogDetalji(Korisnik serviser) {
         initComponents();
         konacnaCena = 0;
         this.serviser = serviser;
@@ -127,7 +133,8 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         lblDatum = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        lblServiser = new javax.swing.JLabel();
+        cbServiseri = new javax.swing.JComboBox<>();
+        btnPretragaAuto = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Nalog za servisiranje");
@@ -209,13 +216,20 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
         jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel16.setText("€");
 
-        jLabel6.setText("Datum");
+        jLabel6.setText("Datum kreiranja");
 
         lblDatum.setText("jLabel9");
 
-        jLabel9.setText("Izdao");
+        jLabel9.setText("Zaduzen serviser");
 
-        lblServiser.setText("jLabel12");
+        cbServiseri.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnPretragaAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-search-20.png"))); // NOI18N
+        btnPretragaAuto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPretragaAutoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -223,35 +237,22 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
             .addComponent(jSeparator2)
+            .addComponent(jSeparator3)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(174, 174, 174)
+                .addComponent(jLabel14)
+                .addGap(18, 18, 18)
+                .addComponent(lblUkupnaCena)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel16)
+                .addContainerGap(21, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblIzaberiKvar)
-                                    .addComponent(lblIzaberiAutomobil)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel9))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbAutomobili, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cvKvarovi, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblDatum)
-                                            .addComponent(lblServiser))
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel4))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
+                        .addComponent(btnSacuvaj)
+                        .addGap(23, 23, 23))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -271,20 +272,31 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
                                 .addComponent(lblSumiranaCena, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(11, 11, 11)
                                 .addComponent(jLabel7)))
-                        .addGap(29, 29, 29))))
-            .addComponent(jSeparator3)
+                        .addGap(19, 19, 19))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(174, 174, 174)
-                .addComponent(jLabel14)
-                .addGap(18, 18, 18)
-                .addComponent(lblUkupnaCena)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel16)
-                .addContainerGap(31, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSacuvaj)
-                .addGap(23, 23, 23))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblIzaberiKvar)
+                                    .addComponent(lblIzaberiAutomobil)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel9))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblDatum)
+                                    .addComponent(cvKvarovi, 0, 199, Short.MAX_VALUE)
+                                    .addComponent(cbAutomobili, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbServiseri, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnPretragaAuto)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,7 +312,8 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblIzaberiAutomobil)
-                    .addComponent(cbAutomobili, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbAutomobili, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPretragaAuto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblIzaberiKvar)
@@ -308,12 +321,12 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(lblServiser))
-                .addGap(20, 20, 20)
+                    .addComponent(cbServiseri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -417,8 +430,8 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
         NalogZaServisiranje nalog = new NalogZaServisiranje();
         nalog.setKvar((UoceniKvar) cvKvarovi.getSelectedItem());
         nalog.setCena(this.konacnaCena);
-        nalog.setDatum(LocalDate.now());
-        nalog.setServiser(this.serviser);
+        nalog.setDatumKreiranja(LocalDate.now());
+        nalog.setServiser((Korisnik)cbServiseri.getSelectedItem());
 
         try {
             Controller.getInstance().zapamtiNalogZaServisiranje(nalog);
@@ -434,10 +447,23 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnSacuvajActionPerformed
 
+    private void btnPretragaAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretragaAutoActionPerformed
+        // TODO add your handling code here:
+        JDialog dialog = new JDialog((JDialog) this.getTopLevelAncestor(), "Odaberi automobil", true);
+        JPanel frmPretragaAuto = new FrmPretragaAuto((FrmNalogDetalji) this, this.listaAutomobila);
+        dialog.add(frmPretragaAuto);
+        dialog.pack();
+        dialog.setLocationRelativeTo(this);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_btnPretragaAutoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPretragaAuto;
     private javax.swing.JButton btnSacuvaj;
     private javax.swing.JComboBox<String> cbAutomobili;
+    private javax.swing.JComboBox<String> cbServiseri;
     private javax.swing.JComboBox<String> cvKvarovi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -460,7 +486,6 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
     private javax.swing.JLabel lblIzaberiAutomobil;
     private javax.swing.JLabel lblIzaberiKvar;
     private javax.swing.JLabel lblPorez;
-    private javax.swing.JLabel lblServiser;
     private javax.swing.JLabel lblSumiranaCena;
     private javax.swing.JLabel lblUkupnaCena;
     private javax.swing.JTable tblPokvareniDelovi;
@@ -480,13 +505,14 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
         if (this.nalog == null) {
             System.out.println("OVO SE NE IZVRSAVA");
             vratiSveAutomobile();
+            vratiSveServisere();
             lblAdministrativniTroskovi.setText("0");
             lblPorez.setText("0");
             lblSumiranaCena.setText("0");
             lblUkupnaCena.setText("0");
             SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy.");
             lblDatum.setText(df.format(new Date()));
-            lblServiser.setText(this.serviser.getIme() + " " + this.serviser.getPrezime());
+            //lblServiser.setText(this.serviser.getIme() + " " + this.serviser.getPrezime());
         } else {
             prikaziDetaljeNaloga();
         }
@@ -560,7 +586,7 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
         lblPorez.setText("0");
         lblSumiranaCena.setText("0");
         lblUkupnaCena.setText("0");
-        lblServiser.setText(this.serviser.getIme() + " " + this.serviser.getPrezime());
+        //lblServiser.setText(this.serviser.getIme() + " " + this.serviser.getPrezime());
         cbAutomobili.setSelectedIndex(-1);
         cvKvarovi.removeAllItems();
         ((TableModelPokvarenDeo) tblPokvareniDelovi.getModel()).ocistiListu();
@@ -572,10 +598,10 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
      * Dodeljuje vrednosti svim grafickim komponentama u skaldu sa podacima o nalogu.
      */
     private void prikaziDetaljeNaloga() {
-        lblDatum.setText(nalog.getDatum().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
+        lblDatum.setText(nalog.getDatumKreiranja().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
         lblIzaberiAutomobil.setText("Automobil");
         lblIzaberiKvar.setText("Kvar");
-        lblServiser.setText(nalog.getServiser().getIme() + " " + nalog.getServiser().getPrezime());
+        //lblServiser.setText(nalog.getServiser().getIme() + " " + nalog.getServiser().getPrezime());
         cbAutomobili.removeAllItems();
         cbAutomobili.addItem("<html><font color = black>"+nalog.getKvar().getAutomobil().getTablice()+"</font></html>");
         cbAutomobili.setEnabled(false);
@@ -593,5 +619,19 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
         tblPokvareniDelovi.setEnabled(false);
         izracunajCene();
         btnSacuvaj.setVisible(false);
+    }
+
+    public void postaviAutomobilCB(Automobil a) {
+        cbAutomobili.setSelectedItem(a);
+    }
+
+    private void vratiSveServisere() {
+        try {
+            listaServisera = Controller.getInstance().vratiSveServisere();
+            cbServiseri.setModel(new DefaultComboBoxModel(listaServisera.toArray()));
+            cbServiseri.setSelectedIndex(-1);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Greska pri ucitavanju svih servisera!", "Greska", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

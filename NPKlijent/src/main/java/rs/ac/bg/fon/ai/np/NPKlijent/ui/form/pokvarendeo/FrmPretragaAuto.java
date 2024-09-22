@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelAutomobil;
-import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.nalog.FrmNalogDetalji;
+import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.nalog.FrmNalog;
 
 /**
  *
@@ -158,8 +158,8 @@ public class FrmPretragaAuto extends javax.swing.JPanel {
         TableModelAutomobil tm = (TableModelAutomobil)jTable1.getModel();
         Automobil a = tm.getListaAutomobila().get(jTable1.getSelectedRow());
         //sad treba da se odabere u cb
-        if(gf instanceof FrmNalogDetalji){
-            ((FrmNalogDetalji)gf).postaviAutomobilCB(a);  
+        if(gf instanceof FrmNalog){
+            ((FrmNalog)gf).postaviAutomobilCB(a);  
         }
         if(gf instanceof FrmPokvarenDeo){
             ((FrmPokvarenDeo)gf).postaviAutomobilCB(a);  

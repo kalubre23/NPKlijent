@@ -6,7 +6,6 @@ package rs.ac.bg.fon.ai.np.NPKlijent.ui.form;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Korisnik;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Uloga;
 import rs.ac.bg.fon.ai.np.NPKlijent.logic.Controller;
@@ -123,10 +122,14 @@ public class FrmLogin extends javax.swing.JPanel {
      */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         try {
-            if(txtPassword.getText().isBlank() || txtUsername.getText().isBlank()){
+            if(txtUsername.getText().isBlank()){
                 JOptionPane.showMessageDialog(this, "Invalidni username i password", "Greska", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            if(new String(txtPassword.getPassword()).isBlank()){
+                JOptionPane.showMessageDialog(this, "Invalidni username i password", "Greska", JOptionPane.ERROR_MESSAGE);
+                return;
+            } 
             Korisnik korisnik = new Korisnik(txtUsername.getText(), new String(txtPassword.getPassword()));
             Uloga u = new Uloga();
             if(checkAdmin.isSelected()){
@@ -141,9 +144,18 @@ public class FrmLogin extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, korisnik.getIme()+" se ulogovao!", "Prijava na sistem", JOptionPane.INFORMATION_MESSAGE);
             System.out.println(korisnik);
             
-            JFrame frame = new FrmMain(korisnik);
-            this.getTopLevelAncestor().setVisible(false);
-            frame.setVisible(true);
+            if(korisnik.getUloga().getUloga().equals("admin")){
+                JFrame frame = new FrmMain(korisnik);
+                this.getTopLevelAncestor().setVisible(false);
+                frame.setVisible(true);
+            }else {
+                //ulogovao se serviser i njemu prikazati njegov UI
+                JFrame frame = new FrmMainServiser(korisnik);
+                this.getTopLevelAncestor().setVisible(false);
+                frame.setVisible(true);
+            }
+            
+            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Prijava na sistem neuspesna!\n"+ex.getMessage(), "Prijava na sistem", JOptionPane.ERROR_MESSAGE);
         }

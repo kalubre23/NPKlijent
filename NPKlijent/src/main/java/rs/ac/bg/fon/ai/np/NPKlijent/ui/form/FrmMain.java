@@ -17,7 +17,7 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.Korisnik;
 import rs.ac.bg.fon.ai.np.NPKlijent.logic.Controller;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.automobil.FrmAutoDetalji;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.automobil.FrmIzmeniAuto;
-import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.nalog.FrmNalogDetalji;
+import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.nalog.FrmNalog;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.nalog.FrmSviNalozi;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.pokvarendeo.FrmIzmeniPokvarenDeo;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.pokvarendeo.FrmPokvarenDeo;
@@ -365,14 +365,14 @@ public class FrmMain extends javax.swing.JFrame {
      * Metoda koja se poziva klikom na meni stavku kreiraj novi nalog.
      * 
      * Otvara formu za rad sa nalogom za servisiranje.
-     * @see FrmNalogDetalji
+     * @see FrmNalog
      * @param evt
      */
     private void meniItemNoviNalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meniItemNoviNalogActionPerformed
         // TODO add your handling code here:
         try {
             JDialog dialog = new JDialog(this, "Dodaj nalog za servisiranje", true);
-            JPanel panel = new FrmNalogDetalji(this.korisnik);
+            JPanel panel = new FrmNalog();
             dialog.add(panel);
             dialog.pack();
             dialog.setLocationRelativeTo(this);

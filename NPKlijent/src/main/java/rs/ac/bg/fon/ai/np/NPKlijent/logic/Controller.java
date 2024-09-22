@@ -425,4 +425,13 @@ public class Controller {
         }
     }
 
+    public void izmeniNalogZaServisiranje(NalogZaServisiranje nalogIzmena) throws Exception {
+        Request request = new Request(Operation.IZMENI_NALOG_ZA_SERVISIRANJE, nalogIzmena);
+        sender.send(request);
+        System.out.println("Poslat request za izmenu");
+        Response response = (Response) receiver.receive();
+        if (response.getException() != null) {
+            throw response.getException();
+        }
+    }
 }

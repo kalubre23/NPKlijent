@@ -5,6 +5,7 @@
 package rs.ac.bg.fon.ai.np.NPKlijent.ui.components;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -31,7 +32,7 @@ public class TableModelNalog extends AbstractTableModel{
     /**
      * Nazivi kolona tabele kao niz stringova.
      */
-    String[] naziviKolona = {"Tablice", "Kvar", "Datum", "Cena"};
+    String[] naziviKolona = {"Tablice", "Kvar", "Datum kreiranja", "Cena", "Status", "Datum izvrsenja"};
 
     /**
      * Neparametrizovani konstruktor koji inicijalizuje listu naloga za servisiranje.
@@ -48,7 +49,7 @@ public class TableModelNalog extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 6;
     }
 
     @Override
@@ -60,6 +61,8 @@ public class TableModelNalog extends AbstractTableModel{
             case 1: return n.getKvar().getOpis();
             case 2: return n.getDatumKreiranja();
             case 3: return n.getCena();
+            case 4: return n.getStatus() == 0 ? "U obradi" : "Zavrsen";
+            case 5: return n.getDatumIzvrsenja()==null ? "/" : n.getDatumIzvrsenja();
             default: return "n\\a";
         }
     }
@@ -95,6 +98,16 @@ public class TableModelNalog extends AbstractTableModel{
      */
     public void izbrisiNalog(NalogZaServisiranje nalog){
         listaNaloga.remove(nalog);
+        fireTableDataChanged();
+    }
+    
+    public void dodajNalog(NalogZaServisiranje nalog){
+        listaNaloga.add(nalog);
+        fireTableDataChanged();
+    }
+    
+    public void sortirajNalogePoDatumuKreiranja(){
+        listaNaloga.sort((n1, n2) -> n2.getDatumKreiranja().compareTo(n1.getDatumKreiranja()));
         fireTableDataChanged();
     }
     

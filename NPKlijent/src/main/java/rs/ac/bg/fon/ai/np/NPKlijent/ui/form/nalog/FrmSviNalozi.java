@@ -5,8 +5,6 @@
 package rs.ac.bg.fon.ai.np.NPKlijent.ui.form.nalog;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;

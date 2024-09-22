@@ -60,7 +60,7 @@ public class TableModelPokvarenDeo extends AbstractTableModel{
             case 0: return pd.getUoceniKvar().getAutomobil().getTablice();
             case 1: return pd.getUoceniKvar().getOpis();
             case 2: return pd.getDeo();
-            case 3: return pd.getCena()+"";
+            case 3: return pd.getCena()+" €";
             default: return "n\\a";
         }
     }

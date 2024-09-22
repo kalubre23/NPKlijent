@@ -28,8 +28,13 @@
     <dependency>
 	  <groupId>rs.ac.bg.fon.ai.np</groupId>
 	  <artifactId>NPCommon</artifactId>
-	  <version>1.0.0</version>
-	</dependency>
+	  <version>1.0.1</version>
+    </dependency>
+    <dependency>
+        <groupId>com.formdev</groupId>
+        <artifactId>flatlaf</artifactId>
+        <version>3.5.1</version>
+    </dependency>
   </dependencies>
 
   <build>

@@ -4,9 +4,11 @@
  */
 package rs.ac.bg.fon.ai.np.NPKlijent.main;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.FrmLogin;
 
@@ -18,6 +20,11 @@ import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.FrmLogin;
  */
 public class Main {
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel( new FlatLightLaf());
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
         JDialog dialog=new JDialog((JFrame)null, "Login", true);
         JPanel panel=new FrmLogin();
         dialog.add(panel);

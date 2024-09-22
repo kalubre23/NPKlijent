@@ -267,12 +267,8 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
                 Controller.getInstance().sacuvajAutomobil(auto);
                 
                 JOptionPane.showMessageDialog(this, "Sistem je zapamtio automobil!", "Kreiraj automobil", JOptionPane.INFORMATION_MESSAGE);
-                int opcija = JOptionPane.showConfirmDialog(this, "Nastavi unos?", "Potvrda", JOptionPane.YES_NO_OPTION);
-                if(opcija == JOptionPane.YES_OPTION){
-                    pripremiFormuZaNoviUnos();
-                }else{
-                   ((JDialog) this.getTopLevelAncestor()).dispose();
-                }
+                ((JDialog) this.getTopLevelAncestor()).dispose();
+                
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Sistem ne moze da zapamti automobil!\n" + ex.getMessage(), "Kreiraj automobil", JOptionPane.ERROR_MESSAGE);
             }

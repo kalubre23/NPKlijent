@@ -24,15 +24,29 @@ import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelNalog;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.nalog.FrmNalogDetalji;
 
 /**
- *
- * @author Asus
+ * Predstavlja glavnu graficku formu za servisera.
+ * 
+ * Serviseru se prikazuje u gornjem levom uglu njegovo ime i prezime kao i danasnji datum.
+ * Serviser ima pregled njemu dodeljenih naloga na izvrsavanje. Moze da vidi sve nezavrsene naloge i da ih doda u listu zavrsenih.
+ * 
+ * @author Luka Obrenic
+ * @since 1.0.0
  */
 public class FrmMainServiser extends javax.swing.JFrame {
-    
+    /**
+     * Ulogovani serviser, tipa {@link Korisnik}
+     */
     Korisnik serviser;
+    /**
+     * Lista svih naloga dodeljenih serviseru, tipa {@link NalogZaServisiranje}
+     */
     List<NalogZaServisiranje> sviNalozi;
     /**
-     * Creates new form FrmMainServiser
+     * Kreira novu formu FrmMainServiser.
+     * 
+     * Inicijalizuje komponente, postavlja naslov, ime korisnika i pokrece nit za prikaz datuma.
+     * 
+     * @param serviser serviser koji se ulogovao.
      */
     public FrmMainServiser(Korisnik serviser) {
         initComponents();
@@ -312,6 +326,12 @@ public class FrmMainServiser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metoda koja se poziva klikom na dugme "Detalji".
+     * 
+     * Otvara novu formu za prikaz naloga, nakon sto je selektovan isti u tabeli.
+     * @param evt 
+     */
     private void btnDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetaljiActionPerformed
         // TODO add your handling code here:
         
@@ -334,6 +354,14 @@ public class FrmMainServiser extends javax.swing.JFrame {
         dialog.setVisible(true);
     }//GEN-LAST:event_btnDetaljiActionPerformed
 
+    /**
+     * Metoda koja se poziva klikom na lupu za pretragu.
+     * 
+     * Pretrazuje naloge na osnovu unesene vrednosti za tablice automobila.
+     * Iz liste svih naloga, prikazace se samo oni kojima registarske tablice automobila pocinju sa unesenom vrednosti za pretragu.
+     * 
+     * @param evt 
+     */
     private void btnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziActionPerformed
         // TODO add your handling code here:
         if(txtNalog.getText().isBlank()){
@@ -361,6 +389,12 @@ public class FrmMainServiser extends javax.swing.JFrame {
         tm.setListaNaloga(podlista);
     }//GEN-LAST:event_btnPretraziActionPerformed
 
+    /**
+     * Metoda koja se poziva klikom na dugme "Svi nalozi".
+     * 
+     * Iz liste svih naloga uzimaju se samo oni koji nisu zavrseni (status=0), i prikazuju se u tabeli.
+     * @param evt 
+     */
     private void btnSviNezavrseniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSviNezavrseniActionPerformed
         // TODO add your handling code here:
         TableModelNalog tm = (TableModelNalog)tblNezavrseni.getModel();
@@ -377,6 +411,17 @@ public class FrmMainServiser extends javax.swing.JFrame {
         ((TableModelNalog)tblNezavrseni.getModel()).setListaNaloga(nezavrseni);
     }//GEN-LAST:event_btnSviNezavrseniActionPerformed
 
+    /**
+     * Metoda koja se poziva klikom na dugme "Dodaj u zavrsene".
+     * 
+     * Pita servisera da li zeli da izvrsi selektovani nalog iz tabele. 
+     * Izvrsavanje naloga podrazumeva izmenu statusa u 1 i postavljanje datuma izvrsavanja.
+     * Poziva se metoda kontrolera za izmenu naloga i prosledjuje joj se izmenjeni nalog(sa statusom=1 i datumom izvrsenja kao trenutnim datumom).
+     * Nakon toga nalog se iz tabele nezavrsenih dodaje u tabelu zavrsenih.
+     * Ukoliko dodje do greske ona se prikazuje i nalog se vraca u prvobitno stanje.
+     * 
+     * @param evt 
+     */
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
         // TODO add your handling code here:
         //samo joption pane dje se kaze da  li siguran 
@@ -409,6 +454,13 @@ public class FrmMainServiser extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDodajActionPerformed
 
+    /**
+     * Metoda koja se pizva klikom na dugme "Odjavi se".
+     * 
+     * Poziva metodu kontrolera za logout servisera i gasi aplikaciju.
+     * 
+     * @param evt
+     */
     private void btnOdjaviSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdjaviSeActionPerformed
         // TODO add your handling code here:
         try {
@@ -422,6 +474,14 @@ public class FrmMainServiser extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnOdjaviSeActionPerformed
 
+    /**
+     * Metoda koja se poziva klikom na dugme "Ukolni".
+     * 
+     * Menja izvrsen nalog u neizvrsen odnosno brise ga iz tabele izvrsenih i dodaje u tabelu neizvrsenih.
+     * Poziva metodu kontrolera za izmenu naloga i prosledjuje joj izmenjeni nalog (status=0 i datumIzvrsenja=null).
+     * Ako je izmena uspesna, brise se iz liste zavrsenih dodaje u listu nezavrsenih koja se zatim sortira po datumu kreiranja i prikazuje u tabeli.
+     * @param evt 
+     */
     private void btnUkloniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUkloniActionPerformed
         // TODO add your handling code here:
         String message = "Da li sigurno zelite da postavite nalog kao nezavrsen?\nDatum izvrsenja ce biti obrisan.";
@@ -457,6 +517,7 @@ public class FrmMainServiser extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnUkloniActionPerformed
+
 
     private void btnDetalji2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalji2ActionPerformed
         // TODO add your handling code here:
@@ -508,6 +569,16 @@ public class FrmMainServiser extends javax.swing.JFrame {
     private javax.swing.JTextField txtNalog;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Priprema formu za prikaz.
+     * 
+     * Priprema podrazumeva vracanje liste svih naloga koji su dodeljeni ulogvanom serviseru.
+     * Ako je ova lista prazna, onemogucava se koriscenje forme i prikazuje poruka da serviser nema dodeljenih naloga.
+     * Ako nije, lista se podeli u dve podliste koja sadrzi: 1. nezavrsene i 2. zavrsene naloge. Nakon toga se oni prikazuju u svojim tabelama.
+     * 
+     * Ukoliko se desi greska pri vracanju liste svih naloga dodeljenih serviseru, ona se prikazuje serviseru.
+     * 
+     */
     private void prepareView() {
         //treba da se vrate svi mozda nalozi pa onda da se raspodjele
         try {

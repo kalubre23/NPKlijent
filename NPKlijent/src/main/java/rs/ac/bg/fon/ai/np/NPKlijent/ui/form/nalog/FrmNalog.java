@@ -7,7 +7,6 @@ package rs.ac.bg.fon.ai.np.NPKlijent.ui.form.nalog;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,13 +26,14 @@ import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.pokvarendeo.FrmPretragaAuto;
 
 
 /**
- * Predstavlja graficku formu koja prikazuje podatke o jednom nalogu za servisiranje. 
- * Moze sluziti za dodavanje novog naloga u bazu ili da samo prikaze podatke o vec postojecem nalogu (read-only).
+ * Predstavlja graficku formu za unos podataka o nalogu. 
  * 
  * Nalog se pravi za jedan uceni kvar koji ima vise pokvarenih delova. Npr uoceni kvar: problemi sa motorom, pokvareni delovi: kvacilo, akumulator.
  * 
- * Serviseru se prikazuje lista svih automobila od kojih treba da se odabere jedan za koji ce se napraviti nalog.
- * Takodje mu se prikazuju svi pokvareni delovi za taj automobil za jedan uocen kvar i njihove cene. Ove cene se saberu i dodaju dodatni troskovi. Tako se dobija ukupna cena naloga za servisiranje.
+ * Administratoru se prikazuje lista svih automobila od kojih treba da se odabere jedan za koji ce se napraviti nalog.
+ * Takodje mu se prikazuju svi pokvareni delovi za taj automobil za jedan uocen kvar i njihove cene. 
+ * Ove cene se saberu i dodaju dodatni troskovi. Tako se dobija ukupna cena naloga za servisiranje.
+ * Administrator takodje bira servisera kome ce biti dodeljen nalog za servisiranje na izvrsavanje.
  * 
  * @see NalogZaServisiranje
  * @author Luka Obrenic
@@ -41,15 +41,18 @@ import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.pokvarendeo.FrmPretragaAuto;
  */
 public class FrmNalog extends javax.swing.JPanel {
 
-	/**
-	 * Lista svih automobila za koje se moze napraviti nalog, kao lista tipa {@link Automobil}.
-	 */
+    /**
+     * Lista svih automobila za koje se moze napraviti nalog, kao lista tipa {@link Automobil}.
+     */
     List<Automobil> listaAutomobila;
     /**
      * Lista svih pokvarenih delova za odabrani automobil, kao lista tipa {@link PokvareniDeo}.
      */
     List<PokvareniDeo> listaPokvarenihDelova;
     
+    /**
+     * Lista svih servisera kojima moze biti dodeljen nalog za servisiranje.
+     */
     List<Korisnik> listaServisera;
     
     /**
@@ -60,9 +63,6 @@ public class FrmNalog extends javax.swing.JPanel {
     /**
      * Kreira novu formu FrmNoviNalog. 
      * 
-     * Ovaj konstruktor se koristi ukoliko se kreira novi nalog za servisiranje.
-     * 
-     * @param serviser koji zakljucuje nalog, koji se dodeljuje atributu serviser, tipa {@link Korisnik}.
      */
     public FrmNalog() {
         initComponents();
@@ -382,7 +382,7 @@ public class FrmNalog extends javax.swing.JPanel {
      * Metoda koja se poziva klikom na dugme sacuvaj.
      * 
      * Vrsi validaciju da li su selektovani automobil, kvar za taj automobil i da li je cena 0.
-     * Nakon toga poziva metodu kontrolera za dodavanje naloga u bazu.
+     * Nakon toga poziva metodu kontrolera za kreiranje novog naloga na osnovu svih unesenih vrednosti.
      * 
      * @param evt
      */
@@ -419,6 +419,11 @@ public class FrmNalog extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnSacuvajActionPerformed
 
+    /**
+     * Otvara pomocnu formu za pretragu automobila, nakon sto se klikne na lupu za pretragu pored polja za automobil.
+     * 
+     * @see FrmPretragaAuto 
+     */
     private void btnPretragaAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretragaAutoActionPerformed
         // TODO add your handling code here:
         JDialog dialog = new JDialog((JDialog) this.getTopLevelAncestor(), "Odaberi automobil", true);
@@ -466,10 +471,8 @@ public class FrmNalog extends javax.swing.JPanel {
     /**
      * Priprema formu pre nego sto se prikaze.
      * 
-     * Na pocetku ucitava sve pokvarene delove automobila.
-     * Ukoliko je atribut nalog null to znaci da forma sluzi za dodavanje novog 
-     * naloga i dodeljuju se default vrednosti grafickim komponentama (koje ce serviser da popunjava).
-     * Ukiliko atribut nalog nije null znaci da se forma koristi u read-only i da treba da prikaze podatke o nalogu.
+     * Poziva metode za ucitavanje svih pokvarenih delova, automobila i servisera.
+     * Postavlja default vrednosti labela.
      */
     private void prepareView() {
         vratiSvePokvareneDelove();
@@ -490,8 +493,8 @@ public class FrmNalog extends javax.swing.JPanel {
     /**
      * Vraca sve automobile iz baze kako bi se inicijalizovao combobox koji prikazuje sve automobile.
      * 
-     * Koristi se metoda kontrolera za pretragu autommobila i kao kriterijum pretrage za ime i prezime se unosi prazan string.
-     * Na ovaj nacin se vracaju svi automobili iz baze.
+     * Koristi se metoda kontrolera za pretragu automobila i kao kriterijum pretrage za ime i prezime se unosi prazan string.
+     * Na ovaj nacin se vraca lista svih automobila iz baze kojom se inicijalizuje combobox.
      */
     private void vratiSveAutomobile() {
         try {
@@ -509,8 +512,8 @@ public class FrmNalog extends javax.swing.JPanel {
     /**
      * Vraca sve pokvarene delove iz baze kako bi se prikazali u tabeli (ne svi vec samo oni za odabrani kvar).
      * 
-     * Koristi se metoda kontrolera za pretragu pokvarenih delova i kao kriterijum pretrage za tablice se unosi prazan string.
-     * Na ovaj nacin se vracaju svi pokvareni delovi iz baze.
+     * Poziva se metoda kontrolera za pretragu pokvarenih delova i kao kriterijum pretrage za tablice se unosi prazan string.
+     * Na ovaj nacin se vraca lista svih pokvarenih delova iz baze.
      */
     private void vratiSvePokvareneDelove() {
         try {
@@ -526,6 +529,11 @@ public class FrmNalog extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Vraca sve servisere iz baze kako bi se prikazali u combobox-u servisera.
+     * 
+     * Poziva se metoda kontrolera za vracanje liste svih servisera pomocu koje se inicijalizuje combobox.
+     */
     private void vratiSveServisere() {
         try {
             listaServisera = Controller.getInstance().vratiSveServisere();
@@ -563,48 +571,5 @@ public class FrmNalog extends javax.swing.JPanel {
         cbAutomobili.setSelectedItem(a);
     }
 
-
-    /**
-     * Priprema formu za novi unos. Cisti sva polja i postavlja vrednosti na default.
-     */
-//    private void pripremiFormuZaUnos() {
-//        lblAdministrativniTroskovi.setText("0");
-//        lblPorez.setText("0");
-//        lblSumiranaCena.setText("0");
-//        lblUkupnaCena.setText("0");
-//        //lblServiser.setText(this.serviser.getIme() + " " + this.serviser.getPrezime());
-//        cbAutomobili.setSelectedIndex(-1);
-//        cbKvarovi.removeAllItems();
-//        ((TableModelPokvarenDeo) tblPokvareniDelovi.getModel()).ocistiListu();
-//    }
-
-    /**
-     * Poziva se kada je atribut nalog nije null sto znaci da se prikazuju podaci za ovaj nalog (read-only).
-     * 
-     * Dodeljuje vrednosti svim grafickim komponentama u skaldu sa podacima o nalogu.
-     */
-//    private void prikaziDetaljeNaloga() {
-//        lblDatum.setText(nalog.getDatumKreiranja().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
-//        lblIzaberiAutomobil.setText("Automobil");
-//        lblIzaberiKvar.setText("Kvar");
-//        //lblServiser.setText(nalog.getServiser().getIme() + " " + nalog.getServiser().getPrezime());
-//        cbAutomobili.removeAllItems();
-//        cbAutomobili.addItem("<html><font color = black>"+nalog.getKvar().getAutomobil().getTablice()+"</font></html>");
-//        cbAutomobili.setEnabled(false);
-//        cbKvarovi.removeAllItems();
-//        cbKvarovi.addItem("<html><font color = black>"+nalog.getKvar().getOpis()+"</font></html>");
-//        cbKvarovi.setEnabled(false);
-//        UoceniKvar uk = nalog.getKvar();
-//        List<PokvareniDeo> podlista = new ArrayList<>();
-//        for (PokvareniDeo pokvareniDeo : listaPokvarenihDelova) {
-//            if (pokvareniDeo.getUoceniKvar().equals(uk)) {
-//                podlista.add(pokvareniDeo);
-//            }
-//        }
-//        ((TableModelPokvarenDeo) tblPokvareniDelovi.getModel()).setListaPokvarenihDelova(podlista);
-//        tblPokvareniDelovi.setEnabled(false);
-//        izracunajCene();
-//        btnSacuvaj.setVisible(false);
-//    }
 
 }

@@ -11,16 +11,20 @@ import rs.ac.bg.fon.ai.np.NPKlijent.logic.Controller;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelPokvarenDeo;
 
 /**
- *
- * @author Asus
+ * Forma koja prikazuje podatke o selektovanom pokvarenom delu i polje za unos nove cene, u slucaju izmene.
+ * 
+ * @author Luka Obrenic
  */
 public class FrmPokvarenDeoDetalji extends javax.swing.JPanel {
-    
+    /**
+     * Pokvareni deo koji se prikazuje, tipa {@link PokvareniDeo}.
+     */
     private PokvareniDeo pokvareniDeo;
+    
     TableModelPokvarenDeo tm;
     
     /**
-     * Creates new form FrmPokvarenDeoDetalji
+     * Kreira novu formu FrmPokvarenDeoDetalji
      */
     public FrmPokvarenDeoDetalji(PokvareniDeo pokvareniDeo, TableModelPokvarenDeo tm) {
         initComponents();
@@ -142,11 +146,21 @@ public class FrmPokvarenDeoDetalji extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Gasi formu.
+     */
     private void btnNazadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNazadActionPerformed
         // TODO add your handling code here:
         ((JDialog) this.getTopLevelAncestor()).dispose();
     }//GEN-LAST:event_btnNazadActionPerformed
 
+    /**
+     * Metoda koja se poziva klikom na dugme "Izmeni cenu".
+     * 
+     * Vrsi validaciju nove vrednosti cene i poziva metodu kontrolera za izmenu pokvarenog dela.
+     * 
+     * @param evt 
+     */
     private void btnIzmeniCenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniCenuActionPerformed
         // TODO add your handling code here:
         if (!txtCena.getText().matches("[+-]?([0-9]*[.])?[0-9]+")) {
@@ -192,6 +206,9 @@ public class FrmPokvarenDeoDetalji extends javax.swing.JPanel {
     private javax.swing.JTextField txtCena;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Postavlja labele i pocetnu vrednost teksualnog polja za cenu.
+     */
     private void prepareView() {
         lblAutomobil.setText(this.pokvareniDeo.getUoceniKvar().getAutomobil().toString());
         lblKvar.setText(this.pokvareniDeo.getUoceniKvar().getOpis());

@@ -240,8 +240,8 @@ public class FrmSviNalozi extends javax.swing.JPanel {
      *
      * Poziva metodu kontrolera za brisanje naloga iz baze. Ako je brisanje
      * uspesno, brise nalog iz tabele koja se prikazuje.
+     * Ako ne greska se prikazuje serviseru.
      *
-     * @param evt
      */
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
         // TODO add your handling code here:
@@ -313,16 +313,12 @@ public class FrmSviNalozi extends javax.swing.JPanel {
     private javax.swing.JTextField txtTablice;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Postavlja table model tipa {@link TableModelNalog} za tabelu naloga.
+     */
     private void prepareView() {
         tblNalozi.setModel(new TableModelNalog());
 //        vratiSveNaloge();
     }
 
-//    private void vratiSveNaloge() {
-//        try {
-//            sviNalozi = Controller.getInstance().vratiSveNaloge();
-//        } catch (Exception ex) {
-//            JOptionPane.showMessageDialog(this, "Sistem nije mogao da ucita sve naloge!", "Greska", JOptionPane.ERROR_MESSAGE);
-//        }
-//    }
 }

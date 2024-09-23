@@ -24,10 +24,10 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.PokvareniDeo;
  * @since 1.0.0
  */
 public class TableModelPokvarenDeo extends AbstractTableModel{
-	/**
-	 * Lista svih povkarenih delova kao lista tipa PokvareniDeo.
-	 * @see PokvareniDeo
-	 */
+    /**
+     * Lista svih povkarenih delova kao lista tipa PokvareniDeo.
+     * @see PokvareniDeo
+     */
     List<PokvareniDeo> listaPokvarenihDelova;
     /**
      * Nazivi kolona tabele kao niz stringova.
@@ -117,6 +117,9 @@ public class TableModelPokvarenDeo extends AbstractTableModel{
         fireTableDataChanged();
     }
     
+    /**
+     * Osvezava prikaz tabele.
+     */
     public void refresh(){
         fireTableDataChanged();
     }

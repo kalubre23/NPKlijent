@@ -12,17 +12,24 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.DeoAutomobila;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelDeo;
 
 /**
- *
- * @author Asus
+ * Pomocna forma za pretragu delova automobila prema nazivu.
+ * 
+ * @author Luka Obrenic
  */
 public class FrmPretragaDeo extends javax.swing.JPanel {
 
+    /**
+     * Lista svih delova automobila iz koje ce se vrsiti pretraga, tipa {@link DeoAutomobila}.
+     */
     List<DeoAutomobila> delovi;
+    /**
+     * Forma koja je pozvala ovu formu, tipa {@link FrmPokvarenDeo}.
+     */
     FrmPokvarenDeo gf;
     
 
     /**
-     * Creates new form FrmPretragaDeo
+     * Kreira novu formu FrmPretragaDeo
      */
     public FrmPretragaDeo(FrmPokvarenDeo gf, List<DeoAutomobila> delovi) {
         initComponents();
@@ -125,6 +132,12 @@ public class FrmPretragaDeo extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metoda koja se poziva klikom na dugme "Pretrazi".
+     * 
+     * Iz liste svih delova, bira one ciji naziv pocinje sa vrednosti koja je 
+     * uneta u teksualno polje i dodaje ih u podlistu, koja se prikazuje u tabeli.
+     */
     private void btnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziActionPerformed
         // TODO add your handling code here:
         List<DeoAutomobila> pretraga = new ArrayList<>();
@@ -143,6 +156,11 @@ public class FrmPretragaDeo extends javax.swing.JPanel {
         ((TableModelDeo)tblDelovi.getModel()).setDelovi(pretraga);
     }//GEN-LAST:event_btnPretraziActionPerformed
 
+    /**
+     * Metoda koja se poziva klikom na dugme "Odaberi".
+     * 
+     * Selektovani deo iz tabele postavlja kao selektovani u combobox-u forme koja je pozvala ovu formu.
+     */
     private void btnOdaberiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdaberiActionPerformed
         // TODO add your handling code here:
         if (tblDelovi.getSelectedRow() == -1) {
@@ -158,6 +176,9 @@ public class FrmPretragaDeo extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnOdaberiActionPerformed
 
+    /**
+     * Gasi formu.
+     */
     private void btnNazadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNazadActionPerformed
         // TODO add your handling code here:
         ((JDialog)this.getTopLevelAncestor()).dispose();
@@ -174,6 +195,9 @@ public class FrmPretragaDeo extends javax.swing.JPanel {
     private javax.swing.JTextField txtDeo;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Inicijalizuje prikaz tabele.
+     */
     private void prepareView() {
         TableModelDeo tm = new TableModelDeo();
         tblDelovi.setModel(tm);

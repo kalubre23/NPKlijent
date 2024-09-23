@@ -6,8 +6,6 @@ package rs.ac.bg.fon.ai.np.NPKlijent.ui.form.pokvarendeo;
 
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -18,19 +16,24 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.PokvareniDeo;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.UoceniKvar;
 import rs.ac.bg.fon.ai.np.NPKlijent.logic.Controller;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelPokvarenDeo;
-import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.pokvarendeo.FrmPokvarenDeo;
 
 
 /**
- *
- * @author Asus
+ * Forma koja sluzi za pretragu pokvarenih delova prema tabicama automobila.
+ * 
+ * Oni se nakon toga mogu izmeniti, prikazati detaljnije ili obrisati.
+ * 
+ * @author Luka Obrenic
  */
 public class FrmIzmeniPokvarenDeo extends javax.swing.JPanel {
 
+    /**
+     * Lista pokvarenih delova koji ce se prikazati u tabeli, tipa {@link PokvareniDeo}.
+     */
     List<PokvareniDeo> listaSvihPokvarenihDelova;
 
     /**
-     * Creates new form FrmIzmeniPokvarenDeo
+     * Kreira novu formu FrmIzmeniPokvarenDeo
      */
     public FrmIzmeniPokvarenDeo() {
         initComponents();
@@ -162,6 +165,13 @@ public class FrmIzmeniPokvarenDeo extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metoda koja se poziva klikom na dugme "Prikazi sve pokvarene delove".
+     * 
+     * Poziva metodu kontrolera za pretragu svih pokvarenih delova i prosledjuje mu objekat
+     * tipa PokvareniDeo koji sadrzi automobil sa praznim tablicama. Na ovaj nacin se vracaju svi pokvareni delovi iz baze.
+     * @param evt 
+     */
     private void btnPrikaziSvePokvareneDeloveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikaziSvePokvareneDeloveActionPerformed
         // TODO add your handling code here:
         try {
@@ -178,6 +188,15 @@ public class FrmIzmeniPokvarenDeo extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnPrikaziSvePokvareneDeloveActionPerformed
 
+    /**
+     * Metoda koja se poziva klikom na dugme "Pretrazi".
+     * 
+     * Proverava da polje za unos tablice nije prazno i poziva metodu kontrolera za pretragu
+     * pokvarenih delova. Kao parametar joj se prosledjuje objekat tipa PokvareniDeo koji ce sluziti kao kriterijum za pretragu.
+     * Ako je uspesno, vraca se lista pokvarenih delova koja se prikazuje u tabeli.
+     * 
+     * Ako se desila greska, ona se prikazuje korisniku.
+     */
     private void btnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziActionPerformed
         // TODO add your handling code here:
         if (txtTablice.getText().isBlank()) {
@@ -211,6 +230,14 @@ public class FrmIzmeniPokvarenDeo extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnPretraziActionPerformed
 
+    /**
+     * Metoda koja se poziva klikom na dugme "Obrisi".
+     * 
+     * Poziva metodu za brisanje pokvarenog dela iz baze kojoj se kao parametar prosledjuje slektovani pokvareni deo koga 
+     * treba obrisati. Ako je operacija uspesna, on se brise iz tabele.
+     * 
+     * Ako se desila greska, ona se prikazuje korisniku.
+     */
     private void btnObrisiPokvarenDeoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiPokvarenDeoActionPerformed
         // TODO add your handling code here:
         if (tblPokvareniDelovi.getSelectedRow() == -1) {
@@ -231,6 +258,11 @@ public class FrmIzmeniPokvarenDeo extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnObrisiPokvarenDeoActionPerformed
 
+    /**
+     * Metoda koja se poziva klikom na dugme "Izmeni".
+     * 
+     * Otvara formu za izmenu pokvarenog dela i prosledjuje joj selektovani pokvarei deo iz tabele.
+     */
     private void btnIzmeniPokvarenDeoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniPokvarenDeoActionPerformed
         // TODO add your handling code here:
         if (tblPokvareniDelovi.getSelectedRow() == -1) {
@@ -268,25 +300,25 @@ public class FrmIzmeniPokvarenDeo extends javax.swing.JPanel {
     private javax.swing.JTextField txtTablice;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Postavlje table model, tipa{@link TableModelPokvarenDeo}, tabeli za prikaz pokvarenih delova
+     */
     private void prepareView() {
         tblPokvareniDelovi.setModel(new TableModelPokvarenDeo());
         //vratiSvePokvareneDelove();
     }
-//
-//    void refreshTabela() {
-//        TableModelPokvarenDeo tm = (TableModelPokvarenDeo) tblPokvareniDelovi.getModel();
-//        tm.fireTableDataChanged();
-//    }
 
-//    private void vratiSvePokvareneDelove() {
-//       
-//    }
+    /**
+     * Vraca listu pokvarenih delova.
+     * 
+     * @return listaSvihPokvarenihDelova lista pokvarenih delova, tipa {@link PokvareniDeo}.
+     */
     public List<PokvareniDeo> getListaSvihPokvarenihDelova() {
         return listaSvihPokvarenihDelova;
     }
 
-    public JTable getTblPokvareniDelovi() {
-        return tblPokvareniDelovi;
-    }
+//    public JTable getTblPokvareniDelovi() {
+//        return tblPokvareniDelovi;
+//    }
 
 }

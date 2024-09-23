@@ -14,15 +14,22 @@ import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelAutomobil;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.nalog.FrmNalog;
 
 /**
- *
- * @author Asus
+ * Pomocna forma za pretragu automobila prema tablicama.
+ * 
+ * @author Luka Obrenic
  */
 public class FrmPretragaAuto extends javax.swing.JPanel {
 
+    /**
+     * Lista svih automobila iz koje ce se vrsiti pretraga, tipa {@link Automobil}.
+     */
     List<Automobil> automobili;
+    /**
+     * Panel koji je pozvao ovu formu, tipa {@link JPanel}.
+     */
     JPanel gf;
     /**
-     * Creates new form FrmPretragaAuto
+     * Kreira novu formu FrmPretragaAuto
      */
     public FrmPretragaAuto(JPanel gf, List<Automobil> automobili) {
         initComponents();
@@ -129,6 +136,12 @@ public class FrmPretragaAuto extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metoda koja se poziva klikom na dugme "Pretrazi".
+     * 
+     * Iz liste svih automobila, bira one cija tablica pocinje sa vrednosti koja je 
+     * uneta u teksualno polje i dodaje ih u podlistu, koja se prikazuje u tabeli.
+     */
     private void btnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziActionPerformed
         // TODO add your handling code here:
         //pretrazi treba samo da nadje te iz liste automobila
@@ -148,6 +161,11 @@ public class FrmPretragaAuto extends javax.swing.JPanel {
         ((TableModelAutomobil)jTable1.getModel()).setListaAutomobila(pretraga);
     }//GEN-LAST:event_btnPretraziActionPerformed
 
+    /**
+     * Metoda koja se poziva klikom na dugme "Odaberi".
+     * 
+     * Selektovani automobil iz tabele postavlja kao selektovani u combobox-u forme koja je pozvala ovu formu.
+     */
     private void btnOdaberiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdaberiActionPerformed
         // TODO add your handling code here:
         if (jTable1.getSelectedRow() == -1) {
@@ -167,6 +185,9 @@ public class FrmPretragaAuto extends javax.swing.JPanel {
         ((JDialog)this.getTopLevelAncestor()).dispose();
     }//GEN-LAST:event_btnOdaberiActionPerformed
 
+    /**
+     * Gasi formu.
+     */
     private void btnNazadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNazadActionPerformed
         // TODO add your handling code here:
         ((JDialog)this.getTopLevelAncestor()).dispose();
@@ -184,6 +205,9 @@ public class FrmPretragaAuto extends javax.swing.JPanel {
     private javax.swing.JTextField txtTablice;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Inicijalizuje prikaz tabele.
+     */
     private void prepareView() {
         //ovde treba da se odradi init stanje a to je da su svi automobil prikazani
         TableModelAutomobil tm = new TableModelAutomobil();

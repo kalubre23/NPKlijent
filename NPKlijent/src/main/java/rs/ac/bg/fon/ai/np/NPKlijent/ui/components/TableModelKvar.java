@@ -9,11 +9,10 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.UoceniKvar;
 
 /**
- * Predstavlja model tabele za klasu UoceniKvar. Nasledjuje apstraktni model tabele i imeplementira njegove metode.
+ * Predstavlja model tabele za klasu {@link UoceniKvar}. Nasledjuje apstraktni model tabele i imeplementira njegove metode.
  * 
  * Ima listu svih uocenih kvarova koji ce se prikazati u tabeli, metode za dodavanje i brisanje automobila iz liste,
  * kao i metodu za brisanje svih uocenih kvarova iz liste.
@@ -24,15 +23,15 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.UoceniKvar;
  */
 public class TableModelKvar extends AbstractTableModel{
 
-	/**
-	 * Lista svih uocenih kvarova kao lista tipa UoceniKvar.
-	 * @see UoceniKvar
-	 */
+    /**
+     * Lista svih uocenih kvarova kao lista tipa UoceniKvar.
+     * @see UoceniKvar
+     */
     List<UoceniKvar> kvarovi;
     /**
      * Nazivi kolona tabele kao niz stringova.
      */
-    String[] naziviKolone = {"Opis kvara"};
+    String[] naziviKolone = {"RB, Opis kvara"};
 
     /**
      * Neparametrizovani konstruktor koji inicijalizuje listu uocenih kvarova.
@@ -48,7 +47,7 @@ public class TableModelKvar extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 1;
+        return 2;
     }
 
     @Override
@@ -56,7 +55,8 @@ public class TableModelKvar extends AbstractTableModel{
         UoceniKvar k = kvarovi.get(rowIndex);
         
         switch(columnIndex){
-            case 0: return k.getOpis();
+            case 0: return (rowIndex+1)+"";
+            case 1: return k.getOpis();
             default: return "n\\a";
         }
     }
@@ -82,7 +82,6 @@ public class TableModelKvar extends AbstractTableModel{
      * @param row uoceni kvar koji ne treba vise da se prikazuje u tabeli, tipa {@link UoceniKvar}
      */
     public void obrisiKvar(int row){
-        //kvarovi.remove(k);
         kvarovi.remove(row);
         fireTableDataChanged();
     }

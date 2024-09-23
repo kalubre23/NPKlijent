@@ -31,10 +31,10 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.Vlasnik;
  */
 public class Controller {
 
-	/**
-	 * Socket za komunikaciju sa serverom, tipa Socket.
-	 * @see Socket
-	 */
+    /**
+     * Socket za komunikaciju sa serverom, tipa Socket.
+     * @see Socket
+     */
     Socket socket;
     /**
      * Posiljaoc zahteva do servera, tipa Sender.
@@ -78,17 +78,17 @@ public class Controller {
     }
 
     /**
-     * Salje zahtev serveru za logovanje servisera i ceka odgovor. 
+     * Salje zahtev serveru za logovanje korisnika i ceka odgovor. 
      * 
-     * Vraca nazad inicijalizovanog servisera ukoliko je login uspesan ili baca izuzetak 
+     * Vraca nazad inicijalizovanog korisnika ukoliko je login uspesan ili baca izuzetak 
      * ukoliko login nije uspesan.
      * 
-     * @param serviser koji se loguje, tipa Serviser
-     * @return serviser koga je vratio server, login uspesan
+     * @param korisnik koji se loguje, tipa {@link Korisnik}
+     * @return korisnik koga je vratio server, login uspesan
      * @throws Exception ako je login neuspesan
      */
-    public Korisnik login(Korisnik serviser) throws Exception {
-        Request request = new Request(Operation.LOGIN, serviser);
+    public Korisnik login(Korisnik korisnik) throws Exception {
+        Request request = new Request(Operation.LOGIN, korisnik);
         sender.send(request);
 
         Response response = (Response) receiver.receive();
@@ -362,6 +362,14 @@ public class Controller {
         }
     }
 
+    /**
+     * Salje zahtev serveru za cuvanjem vlasnika u bazi.
+     * 
+     * Prima odgovor, i ukoliko se desila greska na serveru, baca se izuzetak.
+     * 
+     * @param vlasnik koga treba sacuvati u bazi, tipa {@link Vlasnik}
+     * @throws Exception ako je doslo do greske na serveru
+     */
     public void sacuvajVlasnika(Vlasnik vlasnik) throws Exception {
         Request request = new Request(Operation.SACUVAJ_VLASNIKA, vlasnik);
         sender.send(request);
@@ -373,6 +381,14 @@ public class Controller {
         }
     }
 
+    /**
+     * Salje serveru zahtev za brisanjem vlasnika iz baze.
+     * 
+     * Ako se desila greska pri brisanju vlasnika na serveru, baca se izuzetak.
+     * 
+     * @param vlasnik koga treba izbrisati iz baze, tipa {@link Vlasnik}
+     * @throws Exception ako se desila greska na serverskoj strani
+     */
     public void obrisiVlasnika(Vlasnik vlasnik) throws Exception {
         Request request = new Request(Operation.OBRISI_VLASNIKA, vlasnik);
         sender.send(request);
@@ -382,6 +398,15 @@ public class Controller {
         }
     }
 
+    /**
+     * Salje serveru zahtev za vlasnicima koji zadovoljavaju kriterijum pretrage.
+     * 
+     * Ako se nije desila greska na serveru vraca listu vlasnika, u suportnom vraca izuzetak.
+     * 
+     * @param vlasnik koji ce se koristiti kao kriterijum pretrage u bazi, tipa {@link Vlasnik}
+     * @return lista vlasnika koji zadovoljavaju kriterijum pretrage, kao lista tipa {@link Vlasnik}
+     * @throws Exception ako dodje do greske na serveru
+     */
     public List<Vlasnik> pronadjiVlasnike(Vlasnik vlasnik) throws Exception {
         Request request = new Request(Operation.PRONADJI_VLASNIKE, vlasnik);
         sender.send(request);
@@ -393,6 +418,14 @@ public class Controller {
         }
     }
 
+    /**
+     * Salje serveru zahtev za izmenu podataka o vlasniku u bazi.
+     * 
+     * Ako se desila greska pri izmeni podataka o vlasniku na serveru, baca se izuzetak.
+     * 
+     * @param vlasnik sa novim (azuriranim vrednostima), tipa {@link Vlasnik}
+     * @throws Exception ako dodje do greske na serverskoj strani
+     */
     public void izmeniVlasnika(Vlasnik vlasnik) throws Exception {
         Request request = new Request(Operation.IZMENI_VLASNIKA, vlasnik);
         sender.send(request);
@@ -402,18 +435,14 @@ public class Controller {
         }
     }
 
-//    public List<Vlasnik> ucitajListuVlasnika() {
-//        Request request = new Request(Operation.UCITAJ_LISTU_VLASNIKA, null);
-//        sender.send(request);
-//
-//        Response response = (Response) receiver.receive();
-//        if (response.getException() == null) {
-//            return (List<Marka>) response.getResult();
-//        } else {
-//            throw response.getException();
-//        }
-//    }
 
+    /**
+     * Salje serveru zahtev za svim serviserima iz baze.
+     * 
+     * Ako se desila greska pri vracanju svih servisera na serveru, baca se izuzetak.
+     * 
+     * @throws Exception ako dodje do greske na serverskoj strani
+     */
     public List<Korisnik> vratiSveServisere() throws Exception {
         Request request = new Request(Operation.VRATI_SVE_SERVISERE, null);
         sender.send(request);
@@ -425,6 +454,14 @@ public class Controller {
         }
     }
 
+    /**
+     * Salje serveru zahtev za izmenu podataka o nalogu u bazi.
+     * 
+     * Ako se desila greska pri izmeni podataka o nalogu na serveru, baca se izuzetak.
+     * 
+     * @param nalogIzmena sa novim (azuriranim vrednostima), tipa {@link NalogZaServisiranje}
+     * @throws Exception ako dodje do greske na serverskoj strani
+     */
     public void izmeniNalogZaServisiranje(NalogZaServisiranje nalogIzmena) throws Exception {
         Request request = new Request(Operation.IZMENI_NALOG_ZA_SERVISIRANJE, nalogIzmena);
         sender.send(request);

@@ -388,13 +388,6 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
             List<Marka> marke = Controller.getInstance().ucitajListuMarki();
             cbMarke.setModel(new DefaultComboBoxModel(marke.toArray()));
         } catch (Exception e) {
-            //JOptionPane.showMessageDialog(this, "Greska!\n"+e.getMessage(), "Greska!", JOptionPane.ERROR_MESSAGE);
-            //AKO PUKNE BILO STA U prepareView() NE TREBA DA OTVARAS FORMU
-            //Ovde treba exception sa astrane servera da se baci i da pise
-            //ne mogu se ucitati marke
-            //posto je uhvacen ovaj izuzetak nastavice se rad prepareView(); i uspesno
-            //ce se izvrsiti konstruktor e to ne treba da se desi vec ovde treba baciti izuzetak opet
-            System.out.println("Ovde ce da uhvati gaaa");
             throw e;
         }
     }

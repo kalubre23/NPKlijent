@@ -11,10 +11,11 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.Uloga;
 import rs.ac.bg.fon.ai.np.NPKlijent.logic.Controller;
 
 /**
- * Predstavlja graficku formu za logovanje servisera u sistem. Serviser unosi username i password da bi se ulogovao.
+ * Predstavlja graficku formu za logovanje korisnika u sistem. Korisnik unosi username i password da bi se ulogovao.
  * 
  * @author Luka Obrenic
  * @since 1.0.0
+ * @see Korisnik
  */
 public class FrmLogin extends javax.swing.JPanel {
 
@@ -55,12 +56,6 @@ public class FrmLogin extends javax.swing.JPanel {
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
-            }
-        });
-
-        txtPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordActionPerformed(evt);
             }
         });
 
@@ -117,7 +112,7 @@ public class FrmLogin extends javax.swing.JPanel {
      * Metoda koja se poziva klikom na dugme login.
      * 
      * Poziva metodu kontrolera za logovanje koja vraca da li je login uspesan ili ne.
-     * Ako jeste prikazuje se glavna forma, ako ne prikazuje se upozorenje o neuspesnom login-u.
+     * Ako jeste prikazuje se glavna forma (koja je razlicita ako je ulogovan admin ili serviser), ako ne prikazuje se upozorenje o neuspesnom login-u.
      * @param evt
      */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
@@ -170,10 +165,6 @@ public class FrmLogin extends javax.swing.JPanel {
         this.getTopLevelAncestor().setVisible(false);
         System.exit(0);
     }//GEN-LAST:event_btnCancelActionPerformed
-
-    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasswordActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

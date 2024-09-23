@@ -25,19 +25,19 @@ import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.vlasnik.FrmSviVlasnici;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.vlasnik.FrmVlasnikDetalji;
 
 /**
- * Predstavlja glavnu graficku formu na klijentskoj strani.
+ * Predstavlja glavnu graficku formu za admina.
  * 
- * Klijentu se prikazuje u gornjem levom uglu njegovo ime i prezime kao i danasnji datum.
- * U meniju se nalaze opcije za otvaranje formi za rad sa automobilom, pokvarenim delovima i nalogom za servisiranje.
+ * Adminu se prikazuje u gornjem levom uglu njegovo ime i prezime kao i danasnji datum.
+ * U meniju se nalaze opcije za otvaranje formi za rad sa automobilom, pokvarenim delovima, nalogom za servisiranje i vlasnikom.
  * 
  * @author Luka Obrenic
  * @since 1.0.0
  */
 public class FrmMain extends javax.swing.JFrame {
 
-	/**
-	 * Serviser koji je ulogovan u sistem tipa {@link Korisnik}.
-	 */
+    /**
+     * Korisnik (admin) koji je ulogovan u sistem tipa {@link Korisnik}.
+     */
     private Korisnik korisnik;
 
     /**

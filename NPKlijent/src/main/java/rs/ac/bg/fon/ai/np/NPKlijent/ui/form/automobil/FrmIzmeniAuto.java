@@ -6,8 +6,6 @@ package rs.ac.bg.fon.ai.np.NPKlijent.ui.form.automobil;
 
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -261,7 +259,11 @@ public class FrmIzmeniAuto extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Sistem je izbrisao podatke o automobilu!", "Potvrda", JOptionPane.INFORMATION_MESSAGE);
             tm.izbirisiAutomobil(automobil);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da izbrise automobil!", "Greska", JOptionPane.ERROR_MESSAGE);
+            String message = "Sistem ne moze da izbrise automobil!\n";
+            if(ex instanceof java.sql.SQLIntegrityConstraintViolationException){
+                message += "Postoje nalozi/pokvareni deolovi vezani za ovaj automobil.";
+            }
+            JOptionPane.showMessageDialog(this, message, "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnObrisiActionPerformed
 

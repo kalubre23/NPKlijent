@@ -23,10 +23,10 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
  * @since 1.0.0
  */
 public class TableModelAutomobil extends AbstractTableModel{
-	/**
-	 * Lista svih automobila kao lista tipa Automobil.
-	 * @see Automobil
-	 */
+    /**
+     * Lista svih automobila kao lista tipa Automobil.
+     * @see Automobil
+     */
     List<Automobil> listaAutomobila;
     /**
      * Nazivi kolona tabele kao niz stringova.

@@ -16,15 +16,20 @@ import rs.ac.bg.fon.ai.np.NPKlijent.logic.Controller;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelPokvarenDeo;
 
 /**
- *
- * @author Asus
+ * Read-only forma za prikaz detalja o nalogu. 
+ * 
+ * Prosledjuje joj se nalog, za koji treba prikazati podatke, preko konstruktora.
+ * 
+ * @author Luka Obrenic
  */
 public class FrmNalogDetalji extends javax.swing.JPanel {
-    
+    /**
+     * Nalog za koji se prikazuju podaci.
+     */
     NalogZaServisiranje nalog;
 
     /**
-     * Creates new form FrmNalogDetalji
+     * Kreira novu formu FrmNalogDetalji
      */
     public FrmNalogDetalji(NalogZaServisiranje nalog) {
         initComponents();
@@ -221,6 +226,10 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Zatvara ovu formu.
+     * 
+     */
     private void btnNazadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNazadActionPerformed
         // TODO add your handling code here:
         ((JDialog)this.getTopLevelAncestor()).dispose();
@@ -252,6 +261,11 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
     private javax.swing.JTable tblPokvareniDelovi;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Priprema prikaz forme. 
+     * 
+     * Postavlja vrednosti svih labela i poziva metodu koja ta taj nalog vraca sve pokvarene delove iz baze.
+     */
     private void prepareView() {
         tblPokvareniDelovi.setModel(new TableModelPokvarenDeo());
         lblAutomobil.setText(this.nalog.getKvar().getAutomobil().getTablice());
@@ -275,6 +289,12 @@ public class FrmNalogDetalji extends javax.swing.JPanel {
         vratiPokvareneDelove();
     }
 
+    /**
+     * Vraca listu svih pokvarenih delova za nalog iz baze i prikazuje ih u tabeli.
+     * 
+     * Poziva se metoda kontrolera koja pronalazi pokvarene delove prema odredjenom kriterijumu.
+     * Ukoliko dodje do greske, ona se prikazuje serviseru.
+     */
     private void vratiPokvareneDelove() {
         PokvareniDeo pd = new PokvareniDeo();
         pd.setUoceniKvar(this.nalog.getKvar());

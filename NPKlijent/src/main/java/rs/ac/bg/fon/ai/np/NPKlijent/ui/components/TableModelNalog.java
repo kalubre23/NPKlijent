@@ -24,10 +24,10 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.NalogZaServisiranje;
  * @since 1.0.0
  */
 public class TableModelNalog extends AbstractTableModel{
-	/**
-	 * Lista svih naloga kao lista tipa NalogZaServisiranje.
-	 * @see NalogZaServisiranje
-	 */
+    /**
+     * Lista svih naloga kao lista tipa NalogZaServisiranje.
+     * @see NalogZaServisiranje
+     */
     List<NalogZaServisiranje> listaNaloga;
     /**
      * Nazivi kolona tabele kao niz stringova.
@@ -101,11 +101,19 @@ public class TableModelNalog extends AbstractTableModel{
         fireTableDataChanged();
     }
     
+    /**
+     * Dodaje nalog u tabelu i osvezava prikaz tabele.
+     * 
+     * @param nalog koji treba da se prikaze u tabeli, tipa {@link NalogZaServisiranje}
+     */
     public void dodajNalog(NalogZaServisiranje nalog){
         listaNaloga.add(nalog);
         fireTableDataChanged();
     }
     
+    /**
+     * Sortira naloge u listi po datumu kreiranja u opadajucem redosledu.
+     */
     public void sortirajNalogePoDatumuKreiranja(){
         listaNaloga.sort((n1, n2) -> n2.getDatumKreiranja().compareTo(n1.getDatumKreiranja()));
         fireTableDataChanged();

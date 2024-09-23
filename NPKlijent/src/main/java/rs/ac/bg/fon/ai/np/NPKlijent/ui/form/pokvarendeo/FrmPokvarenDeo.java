@@ -22,15 +22,25 @@ import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelPokvarenDeo;
 
 
 /**
- *
- * @author Asus
+ * Forma koja sluzi za unos podataka o pokvarenom delu.
+ * 
+ * Bira se automobil i kvar tog automobila. 
+ * Nakon toga se dodavaju delovi automobila za koje je potreban servis i njihova cena. 
+ * 
+ * @author Luka Obrenic
  */
 public class FrmPokvarenDeo extends javax.swing.JPanel {
 
+    /**
+     * Lista svih automobila, tipa {@link Automobil}.
+     */
     List<Automobil> automobili;
+    /**
+     * Lista svih delova automobila, tipa {@link DeoAutomobila}.
+     */
     List<DeoAutomobila> deloviAutomobila;
     /**
-     * Creates new form FrmPokvarenDeoDetalji
+     * Kreira novu formu FrmPokvarenDeoDetalji
      */
     public FrmPokvarenDeo() {
         initComponents();
@@ -285,6 +295,11 @@ public class FrmPokvarenDeo extends javax.swing.JPanel {
 
     }//GEN-LAST:event_cbKvaroviZaAutomobilItemStateChanged
 
+    /**
+     * Metoda koja se poziva kada se promeni selektovani automobil u combobox-u.
+     * 
+     * Za selektovani automobil, postavlja njegove kvarove u combobox koji ih prikazuje.
+     */
     private void cbAutomobiliItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbAutomobiliItemStateChanged
         // TODO add your handling code here:
         if (cbAutomobili.getSelectedIndex() == -1) {
@@ -296,11 +311,20 @@ public class FrmPokvarenDeo extends javax.swing.JPanel {
 
     }//GEN-LAST:event_cbAutomobiliItemStateChanged
 
+    /**
+     * Gasi formu.
+     */
     private void btnNazadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNazadActionPerformed
         // TODO add your handling code here:
         ((JDialog) this.getTopLevelAncestor()).dispose();
     }//GEN-LAST:event_btnNazadActionPerformed
 
+    /**
+     * Metoda koja se poziva klikom na dugme "Sacuvaj".
+     * 
+     * Proverava da lista pokvarenih delova koje treba sacuvati nije prazna.
+     * Nakon toga poziva metodu kontrolera za cuvanje pokvarenih delova u bazi kojoj se prosledjuje lista.
+     */
     private void btnSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacuvajActionPerformed
         // TODO add your handling code here:
         TableModelPokvarenDeo tm = (TableModelPokvarenDeo)tblPokvareniDelovi.getModel();
@@ -323,6 +347,9 @@ public class FrmPokvarenDeo extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnSacuvajActionPerformed
 
+    /**
+     * Otvara pomocnu formu za pretragu automobila.
+     */
     private void btnPretraziAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziAutoActionPerformed
         // TODO add your handling code here:
         JDialog dialog = new JDialog((JDialog) this.getTopLevelAncestor(), "Odaberi automobil", true);
@@ -334,6 +361,9 @@ public class FrmPokvarenDeo extends javax.swing.JPanel {
         dialog.setVisible(true);
     }//GEN-LAST:event_btnPretraziAutoActionPerformed
 
+    /**
+     * Otvara pomocnu formu za pretragu pokvarenih delova.
+     */
     private void btnPretraziDeoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziDeoActionPerformed
         // TODO add your handling code here:
         JDialog dialog = new JDialog((JDialog) this.getTopLevelAncestor(), "Odaberi deo automobila", true);
@@ -345,6 +375,11 @@ public class FrmPokvarenDeo extends javax.swing.JPanel {
         dialog.setVisible(true);
     }//GEN-LAST:event_btnPretraziDeoActionPerformed
 
+    /**
+     * Metoda koja se poziva klikom na dugme "Dodaj".
+     * 
+     * Vrsi validaciju svih polja i na osnovu njih pravi objekat tipa {@link PokvareniDeo} koji se dodaje u tabelu.
+     */
     private void btnDodajPokvarenDeoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajPokvarenDeoActionPerformed
         // TODO add your handling code here:
         if (cbAutomobili.getSelectedIndex() == -1) {
@@ -388,6 +423,12 @@ public class FrmPokvarenDeo extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDodajPokvarenDeoActionPerformed
 
+    /**
+     * Metoda koja se poziva klikom na dugme "Obrisi".
+     * 
+     * Brise selektovani pokvareni deo iz tabele.
+     * @param evt 
+     */
     private void btnObrisiDeoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiDeoActionPerformed
         // TODO add your handling code here:
         if (tblPokvareniDelovi.getSelectedRow() == -1) {
@@ -428,6 +469,11 @@ public class FrmPokvarenDeo extends javax.swing.JPanel {
     private javax.swing.JTextField txtCenaPopravke;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Priprema formu za prikaz.
+     * 
+     * Poziva metode za vracanje svih automobila i pokvarenih delova.
+     */
     private void prepareView() {
         ucitajAutomobile();
         ucitajDeloveAutomobila();
@@ -436,6 +482,12 @@ public class FrmPokvarenDeo extends javax.swing.JPanel {
         lblTabliceAuta.setText("");
     }
 
+    /**
+     * Vraca sve automobile iz baze.
+     * Poziva se metoda kontrolera za pretragu automobila i kao kriterijum se prosledjuje automobil sa praznim tablicama.
+     * Na ovaj nacin se vracaju svi automobili iz baze.
+     * Nakon toga inicijalizuje combobox-ove.
+     */
     private void ucitajAutomobile() {
         try {
             Automobil auto = new Automobil();
@@ -449,6 +501,10 @@ public class FrmPokvarenDeo extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Poziva metodu kontrolera za koja vraca listu svih delova automobila.
+     * Ova lista sluzi za inicijalizaciju combobox-a iz koga se selektuju delovi.
+     */
     private void ucitajDeloveAutomobila() {
         try {
             deloviAutomobila = Controller.getInstance().ucitajListuDelovaAutomobila();
@@ -460,10 +516,20 @@ public class FrmPokvarenDeo extends javax.swing.JPanel {
 
     }
     
+    /**
+     * Selektuje automobil u combobox-u.
+     * 
+     * @param a koji ce se selektovati u combobox-u.
+     */
     void postaviAutomobilCB(Automobil a){
         cbAutomobili.setSelectedItem(a);
     }
 
+    /**
+     * Selektuje deo u combobox-u.
+     * 
+     * @param d koji ce se selektovati u combobox-u.
+     */
     void postaviDeoCB(DeoAutomobila d) {
         cbDeoAutomobila.setSelectedItem(d);
     }

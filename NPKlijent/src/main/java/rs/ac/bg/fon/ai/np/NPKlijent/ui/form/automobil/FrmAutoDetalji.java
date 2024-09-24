@@ -388,6 +388,7 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
             List<Marka> marke = Controller.getInstance().ucitajListuMarki();
             cbMarke.setModel(new DefaultComboBoxModel(marke.toArray()));
         } catch (Exception e) {
+            e.printStackTrace();
             throw e;
         }
     }

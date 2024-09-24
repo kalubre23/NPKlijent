@@ -31,7 +31,7 @@ public class TableModelKvar extends AbstractTableModel{
     /**
      * Nazivi kolona tabele kao niz stringova.
      */
-    String[] naziviKolone = {"RB, Opis kvara"};
+    String[] naziviKolone = {"RB", "Opis kvara"};
 
     /**
      * Neparametrizovani konstruktor koji inicijalizuje listu uocenih kvarova.

@@ -59,6 +59,8 @@ public class FrmNalog extends javax.swing.JPanel {
      * Ukupna cena servisa.
      */
     double konacnaCena;
+    
+    FrmSviNalozi frmSviNalozi;
 
     /**
      * Kreira novu formu FrmNoviNalog. 
@@ -66,6 +68,13 @@ public class FrmNalog extends javax.swing.JPanel {
      */
     public FrmNalog() {
         initComponents();
+        konacnaCena = 0;
+        prepareView();
+    }
+    
+    public FrmNalog(FrmSviNalozi frmSviNalozi) {
+        initComponents();
+        this.frmSviNalozi = frmSviNalozi;
         konacnaCena = 0;
         prepareView();
     }
@@ -412,6 +421,11 @@ public class FrmNalog extends javax.swing.JPanel {
             Controller.getInstance().zapamtiNalogZaServisiranje(nalog);
             JOptionPane.showMessageDialog(this, "Sistem je zapamtio nalog za servisiranje!", "Potvrda", JOptionPane.INFORMATION_MESSAGE);
             
+            if(this.frmSviNalozi!=null){
+                //to znaci da je pozvan iz frmSviNalozi i treba da se doda u tabelu
+                frmSviNalozi.dodajNalogUTabelu(nalog);
+            }
+            
             ((JDialog) this.getTopLevelAncestor()).dispose();
             
         } catch (Exception ex) {
@@ -569,6 +583,11 @@ public class FrmNalog extends javax.swing.JPanel {
     
     public void postaviAutomobilCB(Automobil a) {
         cbAutomobili.setSelectedItem(a);
+    }
+
+    public void dodajAutoUCB(Automobil auto) {
+        ((DefaultComboBoxModel)cbAutomobili.getModel()).addElement(auto);
+
     }
 
 

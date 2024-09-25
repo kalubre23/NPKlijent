@@ -533,4 +533,8 @@ public class FrmPokvarenDeo extends javax.swing.JPanel {
     void postaviDeoCB(DeoAutomobila d) {
         cbDeoAutomobila.setSelectedItem(d);
     }
+
+    void dodajAutoUCB(Automobil auto) {
+        ((DefaultComboBoxModel)cbAutomobili.getModel()).addElement(auto);
+    }
 }

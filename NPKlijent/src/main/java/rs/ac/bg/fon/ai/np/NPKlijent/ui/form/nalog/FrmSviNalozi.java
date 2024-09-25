@@ -61,6 +61,7 @@ public class FrmSviNalozi extends javax.swing.JPanel {
         tblNalozi = new javax.swing.JTable();
         btnObrisi = new javax.swing.JButton();
         btnDetalji = new javax.swing.JButton();
+        btnDodajNalog = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Nalozi za servisiranje");
@@ -110,6 +111,13 @@ public class FrmSviNalozi extends javax.swing.JPanel {
             }
         });
 
+        btnDodajNalog.setText("Dodaj novi nalog");
+        btnDodajNalog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajNalogActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,8 +126,10 @@ public class FrmSviNalozi extends javax.swing.JPanel {
             .addComponent(jSeparator2)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDodajNalog)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDetalji)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnObrisi))
@@ -163,7 +173,8 @@ public class FrmSviNalozi extends javax.swing.JPanel {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnObrisi)
-                    .addComponent(btnDetalji))
+                    .addComponent(btnDetalji)
+                    .addComponent(btnDodajNalog))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -297,9 +308,21 @@ public class FrmSviNalozi extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDetaljiActionPerformed
 
+    private void btnDodajNalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajNalogActionPerformed
+        // TODO add your handling code here:
+        JDialog dialog = new JDialog((JDialog) this.getTopLevelAncestor(), "Kreiraj novog vlasnika", true);
+        JPanel frmNalog = new FrmNalog(this);
+        dialog.add(frmNalog);
+        dialog.pack();
+        dialog.setLocationRelativeTo(this);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_btnDodajNalogActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDetalji;
+    private javax.swing.JButton btnDodajNalog;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPretrazi;
     private javax.swing.JButton btnPrikaziSve;
@@ -319,6 +342,11 @@ public class FrmSviNalozi extends javax.swing.JPanel {
     private void prepareView() {
         tblNalozi.setModel(new TableModelNalog());
 //        vratiSveNaloge();
+    }
+
+    void dodajNalogUTabelu(NalogZaServisiranje nalog) {
+        
+        ((TableModelNalog) tblNalozi.getModel()).setListaNaloga(sviNalozi);
     }
 
 }

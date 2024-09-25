@@ -61,6 +61,7 @@ public class FrmIzmeniAuto extends javax.swing.JPanel {
         btnIzmeni = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
         btnSviAutomobili = new javax.swing.JButton();
+        btnDodajAutomobil = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Automobili");
@@ -110,6 +111,13 @@ public class FrmIzmeniAuto extends javax.swing.JPanel {
             }
         });
 
+        btnDodajAutomobil.setText("Dodaj novi automobil");
+        btnDodajAutomobil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajAutomobilActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,7 +126,8 @@ public class FrmIzmeniAuto extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnDodajAutomobil)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnIzmeni)
                         .addGap(18, 18, 18)
                         .addComponent(btnObrisi)
@@ -170,8 +179,9 @@ public class FrmIzmeniAuto extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIzmeni)
-                    .addComponent(btnObrisi))
-                .addContainerGap(12, Short.MAX_VALUE))
+                    .addComponent(btnObrisi)
+                    .addComponent(btnDodajAutomobil))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -287,8 +297,25 @@ public class FrmIzmeniAuto extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnSviAutomobiliActionPerformed
 
+    private void btnDodajAutomobilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajAutomobilActionPerformed
+        // TODO add your handling code here:
+        try{
+            JDialog dialog = new JDialog((JDialog) this.getTopLevelAncestor(), "Kreiraj novog vlasnika", true);
+            JPanel frmAutoDetalji = new FrmAutoDetalji(null, this);
+            dialog.add(frmAutoDetalji);
+            dialog.pack();
+            dialog.setLocationRelativeTo(this);
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Greska pri otvaranju forme za dodavanje novog automobil!", "GRESKA", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnDodajAutomobilActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodajAutomobil;
     private javax.swing.JButton btnIzmeni;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPretrazi;
@@ -319,6 +346,10 @@ public class FrmIzmeniAuto extends javax.swing.JPanel {
     void refreshTabela() {
         TableModelAutomobil tm = (TableModelAutomobil) tblAutomobili.getModel();
         tm.fireTableDataChanged();
+    }
+
+    void dodajAutoUTabelu(Automobil auto) {
+        ((TableModelAutomobil) tblAutomobili.getModel()).dodajAutomobil(auto);
     }
 
 }

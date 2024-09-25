@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelAutomobil;
+import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.automobil.FrmAutoDetalji;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.nalog.FrmNalog;
 
 /**
@@ -55,6 +56,7 @@ public class FrmPretragaAuto extends javax.swing.JPanel {
         jSeparator3 = new javax.swing.JSeparator();
         btnOdaberi = new javax.swing.JButton();
         btnNazad = new javax.swing.JButton();
+        btnDodajAutomobil = new javax.swing.JButton();
 
         jLabel1.setText("Unesi tablice");
 
@@ -92,28 +94,35 @@ public class FrmPretragaAuto extends javax.swing.JPanel {
             }
         });
 
+        btnDodajAutomobil.setText("Dodaj novi automobil");
+        btnDodajAutomobil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajAutomobilActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtTablice, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnPretrazi))
-                            .addComponent(jSeparator3)))
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
+                        .addComponent(btnDodajAutomobil)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnOdaberi)
                         .addGap(18, 18, 18)
-                        .addComponent(btnNazad)))
+                        .addComponent(btnNazad))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtTablice, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnPretrazi))
+                        .addComponent(jSeparator3)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -131,7 +140,8 @@ public class FrmPretragaAuto extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOdaberi)
-                    .addComponent(btnNazad))
+                    .addComponent(btnNazad)
+                    .addComponent(btnDodajAutomobil))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -145,6 +155,11 @@ public class FrmPretragaAuto extends javax.swing.JPanel {
     private void btnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziActionPerformed
         // TODO add your handling code here:
         //pretrazi treba samo da nadje te iz liste automobila
+        if(txtTablice.getText().isBlank()){
+            ((TableModelAutomobil)jTable1.getModel()).setListaAutomobila(this.automobili);
+            return;
+        }
+        
         List<Automobil> pretraga = new ArrayList<>();
         String tablice = txtTablice.getText().toLowerCase().trim();
         for(Automobil auto : this.automobili){
@@ -193,8 +208,25 @@ public class FrmPretragaAuto extends javax.swing.JPanel {
         ((JDialog)this.getTopLevelAncestor()).dispose();
     }//GEN-LAST:event_btnNazadActionPerformed
 
+    private void btnDodajAutomobilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajAutomobilActionPerformed
+        // TODO add your handling code here:
+        try{
+            JDialog dialog = new JDialog((JDialog) this.getTopLevelAncestor(), "Kreiraj novog vlasnika", true);
+            JPanel frmAutoDetalji = new FrmAutoDetalji(this);
+            dialog.add(frmAutoDetalji);
+            dialog.pack();
+            dialog.setLocationRelativeTo(this);
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Greska pri otvaranju forme za dodavanje novog automobil!", "GRESKA", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnDodajAutomobilActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodajAutomobil;
     private javax.swing.JButton btnNazad;
     private javax.swing.JButton btnOdaberi;
     private javax.swing.JButton btnPretrazi;
@@ -213,5 +245,15 @@ public class FrmPretragaAuto extends javax.swing.JPanel {
         TableModelAutomobil tm = new TableModelAutomobil();
         jTable1.setModel(tm);
         tm.setListaAutomobila(automobili);
+    }
+
+    public void dodajAutoUTabelu(Automobil auto) {
+        if(gf instanceof FrmNalog){
+            ((FrmNalog)gf).dodajAutoUCB(auto);  
+        }
+        if(gf instanceof FrmPokvarenDeo){
+            ((FrmPokvarenDeo)gf).dodajAutoUCB(auto);  
+        }
+        ((TableModelAutomobil)jTable1.getModel()).dodajAutomobil(auto);
     }
 }

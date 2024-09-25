@@ -96,4 +96,14 @@ public class TableModelAutomobil extends AbstractTableModel{
         listaAutomobila.remove(automobil);
         fireTableDataChanged();
     }
+    
+    /**
+     * Dodaje automobil u tabelu i osvezava prikaz tabele.
+     * 
+     * @param automobil koji treba dodati u tabelu, tipa {@link Automobil}
+     */
+    public void dodajAutomobil(Automobil automobil) {
+        listaAutomobila.add(automobil);
+        fireTableDataChanged();
+    }
 }

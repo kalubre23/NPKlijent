@@ -17,6 +17,8 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.UoceniKvar;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Vlasnik;
 import rs.ac.bg.fon.ai.np.NPKlijent.logic.Controller;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelKvar;
+import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.pokvarendeo.FrmPretragaAuto;
+import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.vlasnik.FrmPretragaVlasnik;
 
 /**
  * Predstavlja graficku formu koja prikazuje podatke o jednom automobilu. 
@@ -37,12 +39,24 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
      * Referenca ka formi za pretragu automobila.
      */
     FrmIzmeniAuto frmIzmeniAuto;
+    /**
+     * Lista vlasnika automobila, tipa {@link Vlasnik}.
+     */
+    List<Vlasnik> vlasnici;
+    
+    FrmPretragaAuto frmPretragaAuto;
 
     /**
      * Kreira novu formu FrmAutoDetalji. Ovaj konstruktor se koristi kada treba sacuvati novi automobil.
      */
     public FrmAutoDetalji() throws Exception {
         initComponents();
+        prepareView();
+    }
+    
+    public FrmAutoDetalji(FrmPretragaAuto frmPretragaAuto) throws Exception {
+        initComponents();
+        this.frmPretragaAuto=frmPretragaAuto;
         prepareView();
     }
 
@@ -80,6 +94,7 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
         btnDodajKvar = new javax.swing.JButton();
         btnObrisiKvar = new javax.swing.JButton();
         cbMarke = new javax.swing.JComboBox<>();
+        btnPretragaVlasnik = new javax.swing.JButton();
 
         lblImePrezimeVlasnika.setText("Vlasnik");
 
@@ -136,6 +151,13 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
 
         cbMarke.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        btnPretragaVlasnik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-search-20.png"))); // NOI18N
+        btnPretragaVlasnik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPretragaVlasnikActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -144,40 +166,42 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(lblMarka)
+                            .addComponent(lblGodiste)
+                            .addComponent(lblImePrezimeVlasnika))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbMarke, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(lblMarka)
-                                    .addComponent(lblGodiste)
-                                    .addComponent(lblImePrezimeVlasnika))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtGodiste)
-                                        .addComponent(txtRegistarskaTablica)
-                                        .addComponent(cbVlasnik, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(cbMarke, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jSeparator1))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtGodiste)
+                                    .addComponent(txtRegistarskaTablica)
+                                    .addComponent(cbVlasnik, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPretragaVlasnik, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jSeparator1)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnSacuvaj)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnCancel))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(btnDodajKvar)
+                                            .addComponent(btnObrisiKvar)))))
+                            .addComponent(jLabel2))
                         .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSacuvaj)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCancel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnDodajKvar)
-                            .addComponent(btnObrisiKvar))))
-                .addGap(12, 12, 12))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +213,8 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblImePrezimeVlasnika)
-                    .addComponent(cbVlasnik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbVlasnik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPretragaVlasnik))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtGodiste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,7 +223,7 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMarka)
                     .addComponent(cbMarke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
@@ -265,8 +290,15 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
             kvarovi.forEach(kvar -> {kvar.setAutomobil(auto);});
             try {
                 Controller.getInstance().sacuvajAutomobil(auto);
-                
                 JOptionPane.showMessageDialog(this, "Sistem je zapamtio automobil!", "Kreiraj automobil", JOptionPane.INFORMATION_MESSAGE);
+                
+                if(this.frmPretragaAuto!=null){
+                    //znaci da je uspesno sacuvan vlasnik, treba sada da se doda u tabelu
+                    this.frmPretragaAuto.dodajAutoUTabelu(auto);
+                }
+                if(this.frmIzmeniAuto!=null){
+                    this.frmIzmeniAuto.dodajAutoUTabelu(auto);
+                }
                 ((JDialog) this.getTopLevelAncestor()).dispose();
                 
             } catch (Exception ex) {
@@ -336,11 +368,23 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
         tm.obrisiKvar(tblKvarovi.getSelectedRow());
     }//GEN-LAST:event_btnObrisiKvarActionPerformed
 
+    private void btnPretragaVlasnikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretragaVlasnikActionPerformed
+        // TODO add your handling code here:
+        JDialog dialog = new JDialog((JDialog) this.getTopLevelAncestor(), "Odaberi vlasnika", true);
+        JPanel frmPretragaVlasnik = new FrmPretragaVlasnik(this, this.vlasnici);
+        dialog.add(frmPretragaVlasnik);
+        dialog.pack();
+        dialog.setLocationRelativeTo(this);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_btnPretragaVlasnikActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDodajKvar;
     private javax.swing.JButton btnObrisiKvar;
+    private javax.swing.JButton btnPretragaVlasnik;
     private javax.swing.JButton btnSacuvaj;
     private javax.swing.JComboBox<Object> cbMarke;
     private javax.swing.JComboBox<Object> cbVlasnik;
@@ -369,6 +413,7 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
         System.out.println("Ovo se nece izvrsiti jer izuzetak samo treba dalje baciti!");
         tblKvarovi.setModel(new TableModelKvar());
         if (automobil != null) {
+            btnPretragaVlasnik.setVisible(false);
             txtGodiste.setText(automobil.getGodiste() + "");
             cbVlasnik.setSelectedItem((Vlasnik)automobil.getVlasnik());
             txtRegistarskaTablica.setText(automobil.getTablice());
@@ -387,24 +432,13 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
         try {
             List<Marka> marke = Controller.getInstance().ucitajListuMarki();
             cbMarke.setModel(new DefaultComboBoxModel(marke.toArray()));
+            cbMarke.setSelectedIndex(-1);
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
         }
     }
 
-    /**
-     * Priprema formu za novi unos. Cisti sva polja i postavlja vrednosti na default.
-     */
-    private void pripremiFormuZaNoviUnos() {
-        txtRegistarskaTablica.setText("");
-        txtGodiste.setText("");
-        //txtImePrezimeVlasnika.setText("");
-        cbVlasnik.setSelectedIndex(-1);
-        cbMarke.setSelectedIndex(-1);
-        //sad treba da ispraznim listu kvarova
-        ((TableModelKvar)tblKvarovi.getModel()).ocistiTabelu();
-    }
 
     /**
      * Vraca sve vlasnike automobila. Poziva metodu kontrolera za vracanje svih vlasnika automobila iz baze.
@@ -415,12 +449,21 @@ public class FrmAutoDetalji extends javax.swing.JPanel {
         try {
             Vlasnik v = new Vlasnik();
             v.setIme("");
-            List<Vlasnik> vlasnici = Controller.getInstance().pronadjiVlasnike(v);
+            vlasnici = Controller.getInstance().pronadjiVlasnike(v);
             cbVlasnik.setModel(new DefaultComboBoxModel(vlasnici.toArray()));
+            cbVlasnik.setSelectedIndex(-1);
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
         }
+    }
+
+    public void postaviVlasnikaCB(Vlasnik v) {
+        cbVlasnik.setSelectedItem(v);
+    }
+
+    public void dodajVlasnikaUCB(Vlasnik vlasnikDodaj) {
+        ((DefaultComboBoxModel)cbVlasnik.getModel()).addElement(vlasnikDodaj);
     }
 
 }

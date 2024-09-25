@@ -4,7 +4,10 @@
  */
 package rs.ac.bg.fon.ai.np.NPKlijent.ui.form.vlasnik;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,6 +30,7 @@ import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelVlasnik;
  */
 public class FrmSviVlasnici extends javax.swing.JPanel {
 
+    List<Vlasnik> sviVlasnici;
     /**
      * Kreira novu formu FrmSviVlasnici
      */
@@ -45,7 +49,6 @@ public class FrmSviVlasnici extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         txtIme1 = new javax.swing.JTextField();
         btnPretrazi1 = new javax.swing.JButton();
@@ -54,6 +57,7 @@ public class FrmSviVlasnici extends javax.swing.JPanel {
         tblVlasnici = new javax.swing.JTable();
         btnIzmeni = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
+        btnDodajVlasnika = new javax.swing.JButton();
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Vlasnici");
@@ -87,7 +91,6 @@ public class FrmSviVlasnici extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,9 +113,7 @@ public class FrmSviVlasnici extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtIme1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -121,7 +122,7 @@ public class FrmSviVlasnici extends javax.swing.JPanel {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnIzmeni.setText("Izmeni ");
@@ -138,6 +139,14 @@ public class FrmSviVlasnici extends javax.swing.JPanel {
             }
         });
 
+        btnDodajVlasnika.setForeground(new java.awt.Color(51, 51, 51));
+        btnDodajVlasnika.setText("Dodaj novog vlasnika");
+        btnDodajVlasnika.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajVlasnikaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,16 +156,18 @@ public class FrmSviVlasnici extends javax.swing.JPanel {
                 .addComponent(jSeparator1)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(289, Short.MAX_VALUE)
+                .addGap(19, 19, 19)
+                .addComponent(btnDodajVlasnika)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addComponent(btnIzmeni)
                 .addGap(27, 27, 27)
                 .addComponent(btnObrisi)
                 .addGap(37, 37, 37))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,13 +177,14 @@ public class FrmSviVlasnici extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 294, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIzmeni)
-                    .addComponent(btnObrisi))
+                    .addComponent(btnObrisi)
+                    .addComponent(btnDodajVlasnika))
                 .addGap(27, 27, 27))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(66, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -238,8 +250,8 @@ public class FrmSviVlasnici extends javax.swing.JPanel {
      */
     private void btnPretrazi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretrazi1ActionPerformed
         // TODO add your handling code here:
-        if (txtIme1.getText().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Unesite ime vlasnika!", "Greska pri unosu", JOptionPane.ERROR_MESSAGE);
+        if(txtIme1.getText().isBlank()){
+            ((TableModelVlasnik) tblVlasnici.getModel()).setVlasnici(this.sviVlasnici);
             return;
         }
         if (!txtIme1.getText().matches("[a-zA-Z]+")) {
@@ -248,19 +260,42 @@ public class FrmSviVlasnici extends javax.swing.JPanel {
         }
         
         String ime = txtIme1.getText().trim();
-        try {
-            Vlasnik vlasnik = new Vlasnik();
-            vlasnik.setIme(ime);
-            List<Vlasnik> listaVlasnika = Controller.getInstance().pronadjiVlasnike(vlasnik);
-            ((TableModelVlasnik) tblVlasnici.getModel()).setVlasnici(listaVlasnika);
-            JOptionPane.showMessageDialog(this, "Sistem je nasao vlasnike po zadatoj vredonsti!", "Potvrda", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje vlasnike po zadatoj vrednosti!\n"+ ex.getMessage(), "Greska pri pretrazi", JOptionPane.ERROR_MESSAGE);
+//        try {
+//            Vlasnik vlasnik = new Vlasnik();
+//            vlasnik.setIme(ime);
+//            List<Vlasnik> listaVlasnika = Controller.getInstance().pronadjiVlasnike(vlasnik);
+//            ((TableModelVlasnik) tblVlasnici.getModel()).setVlasnici(listaVlasnika);
+//            JOptionPane.showMessageDialog(this, "Sistem je nasao vlasnike po zadatoj vredonsti!", "Potvrda", JOptionPane.INFORMATION_MESSAGE);
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje vlasnike po zadatoj vrednosti!\n"+ ex.getMessage(), "Greska pri pretrazi", JOptionPane.ERROR_MESSAGE);
+//        }
+        List<Vlasnik> pretraga = new ArrayList<>();
+        for(Vlasnik v : this.sviVlasnici){
+            if(v.getIme().toLowerCase().startsWith(ime)){
+                pretraga.add(v);
+            }
         }
+        if(pretraga.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Ne postoji takav vlasnik!", "Potvrda", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        ((TableModelVlasnik)tblVlasnici.getModel()).setVlasnici(pretraga);
     }//GEN-LAST:event_btnPretrazi1ActionPerformed
+
+    private void btnDodajVlasnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajVlasnikaActionPerformed
+        // TODO add your handling code here:
+        JDialog dialog = new JDialog((JDialog) this.getTopLevelAncestor(), "Kreiraj novog vlasnika", true);
+        JPanel frmVlasnikDetalji = new FrmVlasnikDetalji(null, this);
+        dialog.add(frmVlasnikDetalji);
+        dialog.pack();
+        dialog.setLocationRelativeTo(this);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_btnDodajVlasnikaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodajVlasnika;
     private javax.swing.JButton btnIzmeni;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPretrazi1;
@@ -269,7 +304,6 @@ public class FrmSviVlasnici extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable tblVlasnici;
     private javax.swing.JTextField txtIme1;
@@ -280,6 +314,7 @@ public class FrmSviVlasnici extends javax.swing.JPanel {
      */
     private void prepareView() {
         tblVlasnici.setModel(new TableModelVlasnik());
+        prikaziSveVlasnike();
     }
 
     /**
@@ -288,5 +323,24 @@ public class FrmSviVlasnici extends javax.swing.JPanel {
     void refreshTabela() {
         TableModelVlasnik tm = (TableModelVlasnik) tblVlasnici.getModel();
         tm.fireTableDataChanged();
+    }
+
+    void dodajVlasnikaUTabelu(Vlasnik vlasnikDodaj) {
+        this.sviVlasnici.add(vlasnikDodaj);
+        ((TableModelVlasnik)tblVlasnici.getModel()).dodajVlasnika(vlasnikDodaj);
+    }
+
+    private void prikaziSveVlasnike() {
+        Vlasnik vlasnik = new Vlasnik();
+        vlasnik.setIme("");
+     
+        try {
+            sviVlasnici = Controller.getInstance().pronadjiVlasnike(vlasnik);
+            ((TableModelVlasnik) tblVlasnici.getModel()).setVlasnici(this.sviVlasnici);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Greska pri vracanju vlasnika!", "GRESKA", JOptionPane.ERROR_MESSAGE);
+        }
+            
     }
 }

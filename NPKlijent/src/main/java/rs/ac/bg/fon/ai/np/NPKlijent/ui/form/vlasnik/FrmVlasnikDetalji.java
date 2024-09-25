@@ -32,12 +32,20 @@ public class FrmVlasnikDetalji extends javax.swing.JPanel {
      * Referenca ka formi za pretragu vlasnika.
      */
     FrmSviVlasnici frmSviVlasnici;
+    
+    FrmPretragaVlasnik frmPretragaVasnik;
 
     /**
      * Kreira novu formu FrmVlasnikDetalji. Ovaj konstruktor se koristi kada treba sacuvati novog vlasnika.
      */
     public FrmVlasnikDetalji() {
         initComponents();
+        prepareView();
+    }
+    
+    public FrmVlasnikDetalji(FrmPretragaVlasnik frmPretragaVasnik) {
+        initComponents();
+        this.frmPretragaVasnik=frmPretragaVasnik;
         prepareView();
     }
 
@@ -194,14 +202,19 @@ public class FrmVlasnikDetalji extends javax.swing.JPanel {
             vlasnikDodaj.setTelefon(telefon);
 
             try {
-                Controller.getInstance().sacuvajVlasnika(vlasnikDodaj);
+                vlasnikDodaj = Controller.getInstance().sacuvajVlasnika(vlasnikDodaj);
                 JOptionPane.showMessageDialog(this, "Sistem je zapamtio vlasnika!", "Potvrda", JOptionPane.INFORMATION_MESSAGE);
-                int result = JOptionPane.showConfirmDialog(this, "Nastavi unos?", "Potvrda", JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION) {
-                    pripremiFormuZaNoviUnos();
-                } else {
-                    ((JDialog) this.getTopLevelAncestor()).dispose();
+                
+                if(this.frmPretragaVasnik!=null){
+                    //znaci da je uspesno sacuvan vlasnik, treba sada da se doda u tabelu
+                    this.frmPretragaVasnik.dodajVlasnikaUTabelu(vlasnikDodaj);
                 }
+                if(this.frmSviVlasnici!=null){
+                    this.frmSviVlasnici.dodajVlasnikaUTabelu(vlasnikDodaj);
+                }
+                System.out.println("ID od vlasnika nakon sto se sacuva je: "+vlasnikDodaj.getVlasnikID());
+                
+                ((JDialog) this.getTopLevelAncestor()).dispose();
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Sistem ne moze sacuva da vlasnika!\n" + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);

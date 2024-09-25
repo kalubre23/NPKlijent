@@ -370,12 +370,13 @@ public class Controller {
      * @param vlasnik koga treba sacuvati u bazi, tipa {@link Vlasnik}
      * @throws Exception ako je doslo do greske na serveru
      */
-    public void sacuvajVlasnika(Vlasnik vlasnik) throws Exception {
+    public Vlasnik sacuvajVlasnika(Vlasnik vlasnik) throws Exception {
         Request request = new Request(Operation.SACUVAJ_VLASNIKA, vlasnik);
         sender.send(request);
         Response response = (Response) receiver.receive();
         if (response.getException() == null) {
             System.out.println("Uspesno sacuvan vlasnik!");
+            return (Vlasnik) response.getResult();
         } else {
             throw response.getException();
         }

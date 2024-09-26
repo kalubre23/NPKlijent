@@ -17,6 +17,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <itext.version>8.0.5</itext.version>
   </properties>
 
   <dependencies>
@@ -35,6 +36,22 @@
         <artifactId>flatlaf</artifactId>
         <version>3.5.1</version>
     </dependency>
+    <dependency>
+          <groupId>com.itextpdf</groupId>
+          <artifactId>itext-core</artifactId>
+          <version>${itext.version}</version>
+          <type>pom</type>
+    </dependency>
+    <dependency>
+          <groupId>com.itextpdf</groupId>
+          <artifactId>bouncy-castle-adapter</artifactId>
+          <version>${itext.version}</version>
+    </dependency>
+    <dependency>
+            <groupId>org.simplejavamail</groupId>
+            <artifactId>simple-java-mail</artifactId>
+            <version>8.11.3</version>
+        </dependency>
   </dependencies>
 
   <build>

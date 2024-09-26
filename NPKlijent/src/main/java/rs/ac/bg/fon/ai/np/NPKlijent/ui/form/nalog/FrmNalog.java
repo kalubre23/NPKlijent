@@ -5,15 +5,37 @@
 package rs.ac.bg.fon.ai.np.NPKlijent.ui.form.nalog;
 
 
+import com.itextpdf.io.font.constants.StandardFonts;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.Style;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.element.Text;
+import com.itextpdf.layout.properties.UnitValue;
+import jakarta.activation.DataSource;
+import jakarta.mail.util.ByteArrayDataSource;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.simplejavamail.api.email.Email;
+import org.simplejavamail.api.mailer.Mailer;
+import org.simplejavamail.api.mailer.config.TransportStrategy;
+import org.simplejavamail.email.EmailBuilder;
+import org.simplejavamail.mailer.MailerBuilder;
 
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.NalogZaServisiranje;
@@ -23,6 +45,7 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.UoceniKvar;
 import rs.ac.bg.fon.ai.np.NPKlijent.logic.Controller;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.components.TableModelPokvarenDeo;
 import rs.ac.bg.fon.ai.np.NPKlijent.ui.form.pokvarendeo.FrmPretragaAuto;
+
 
 
 /**
@@ -54,6 +77,8 @@ public class FrmNalog extends javax.swing.JPanel {
      * Lista svih servisera kojima moze biti dodeljen nalog za servisiranje.
      */
     List<Korisnik> listaServisera;
+    
+    List<PokvareniDeo> pokvareniDeloviZaNalog;
     
     /**
      * Ukupna cena servisa.
@@ -384,6 +409,7 @@ public class FrmNalog extends javax.swing.JPanel {
         }
         
         ((TableModelPokvarenDeo) tblPokvareniDelovi.getModel()).setListaPokvarenihDelova(podlista);
+        this.pokvareniDeloviZaNalog = podlista;
         izracunajCene();
     }//GEN-LAST:event_cbKvaroviItemStateChanged
 
@@ -425,6 +451,9 @@ public class FrmNalog extends javax.swing.JPanel {
                 //to znaci da je pozvan iz frmSviNalozi i treba da se doda u tabelu
                 frmSviNalozi.dodajNalogUTabelu(nalog);
             }
+            
+            //ovde da se kreira pdf i posalje mejl
+            kreirajPDF(nalog, this.pokvareniDeloviZaNalog);
             
             ((JDialog) this.getTopLevelAncestor()).dispose();
             
@@ -589,6 +618,99 @@ public class FrmNalog extends javax.swing.JPanel {
         ((DefaultComboBoxModel)cbAutomobili.getModel()).addElement(auto);
 
     }
+
+    private void kreirajPDF(NalogZaServisiranje n, List<PokvareniDeo> pokvareniDelovi) {
+        try{
+            ByteArrayOutputStream pdfOutputStream = new ByteArrayOutputStream();
+            PdfWriter pdfWriter = new PdfWriter(pdfOutputStream);
+            PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+            Document document = new Document(pdfDocument);
+            
+            PdfFont code = PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD);
+
+            Style style = new Style()
+                .setFont(code)
+                .setFontSize(14);
+            
+            Paragraph osnovno = new Paragraph()
+                .add(new Text("Nalog za obradu\n\n").addStyle(style))
+                .add(new Text("Tablice: "+n.getKvar().getAutomobil().getTablice()+"\n"))
+                .add(new Text("Opis kvara: "+n.getKvar().getOpis()+"\n"))
+                .add(new Text("Datum kreiranja: "+n.getDatumKreiranja().toString()+"\n"))
+                .add(new Text("Serviser: "+n.getServiser().getIme()+" "+n.getServiser().getPrezime()+"\n\n"))
+                .add(new Text("Pokvareni delovi\n").addStyle(new Style().setFontSize(10)));
+            
+            
+            document.add(osnovno);
+            
+            Table table = new Table(UnitValue.createPercentArray(4)).useAllAvailableWidth();
+            
+            table.addCell("Tablice");
+            table.addCell("Opis kvara");
+            table.addCell("Deo automobila");
+            table.addCell("Cena");
+            
+            for(PokvareniDeo pd : pokvareniDelovi){
+                table.addCell(pd.getUoceniKvar().getAutomobil().getTablice());
+                table.addCell(pd.getUoceniKvar().getOpis());
+                table.addCell(pd.getDeo().getNaziv());
+                table.addCell(pd.getCena()+" €");
+            }
+            
+            
+            document.add(table);
+            
+            document.close();
+
+            byte[] pdfBytes = pdfOutputStream.toByteArray();
+            DataSource pdfDataSource = new ByteArrayDataSource(pdfBytes, "application/pdf");
+            
+            System.out.println("Pdf izgenerisan!");
+            posaljiMejl(pdfDataSource, n.getServiser());
+            
+        } catch(Exception e){
+            e.printStackTrace();
+            System.out.println("Greska pri generisanju PDF!");
+        }
+    }
+
+    private void posaljiMejl(DataSource pdfDataSource, Korisnik k) {
+        String host;
+        int port;
+        String emailSender;
+        String password;
+        
+        try {
+            Properties appProps = new Properties();
+            appProps.load(new FileInputStream("./src/main/resources/config/mailconfig.properties"));
+            
+            host  = appProps.getProperty("host");
+            port = Integer.parseInt(appProps.getProperty("port"));
+            emailSender  = appProps.getProperty("email");
+            password  = appProps.getProperty("password");
+            System.out.println(host+", "+port+", "+emailSender+", "+password);
+        } catch (IOException ex) {
+            System.out.println("Greska kod ucitavanja MAIL config-a!");
+            ex.printStackTrace();
+            return;
+        }
+        
+        Email email = EmailBuilder.startingBlank()
+            .from("Auto servis", emailSender)
+            .to(k.getIme()+" "+k.getPrezime(), k.getEmail())
+            .withSubject("Novi nalog za servisiranje")
+            .withAttachment("Dodeljen_nalog.pdf", pdfDataSource)
+            .buildEmail();
+
+        
+        
+        Mailer mailer = MailerBuilder
+             .withSMTPServer("smtp.gmail.com", 587, emailSender, password)
+             .withTransportStrategy(TransportStrategy.SMTP)
+             .buildMailer();
+        mailer.sendMail(email);
+    }
+    
 
 
 }
